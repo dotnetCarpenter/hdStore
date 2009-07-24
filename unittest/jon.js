@@ -32,7 +32,7 @@ $(document).ready(function(){
 		equals(store.item('item0'), item0);
 		equals(store.item('item100', item100), store.item('item100'));
 		equals(store.item('item100'), item100);
-		equals(store.items().length, 102, 'hdStore now contains item0 and item100');
+		equals(store.getCount(), 102, 'hdStore now contains item0 and item100');
 	});
 	/* Test#4 */
 	test('hdStore.key and hdStore.key2', function(){
@@ -54,7 +54,7 @@ $(document).ready(function(){
 		// first assertion
 		equals(store.getCount(), 100, 'Counted with hdStore.getCount()');
 		// second assertion
-		equals(store.items().length, 100, 'Counted with hdStore.items()');
+		equals(store.getCount(), 100, 'Counted with hdStore.items()');
 		
 		n = 100;
 		while(n > 0)
@@ -64,7 +64,7 @@ $(document).ready(function(){
 		};
 		n = 100;
 		equals(store.getCount(), 200, 'Counted with hdStore.getCount()');
-		equals(store.items().length, 200, 'Counted with hdStore.items()');
+		equals(store.getCount(), 200, 'Counted with hdStore.items()');
 	});
 	/* Test#6 */
 	test('hdStore.getCount method', function(){
@@ -103,7 +103,7 @@ $(document).ready(function(){
 		setup();
 		
 		expect(2);
-		equals(store.items().length, 100, 'store.items().length should be 100');
+		equals(store.getCount(), 100, 'store.getCount() should be 100');
 		equals(typeof store.items(), 'object', 'store.items() typeof should be object. See table @ http://javascript.crockford.com/remedial.html');
 		teardown();
 	});
@@ -135,7 +135,7 @@ $(document).ready(function(){
 		
 		expect(1);
 		store.removeAll();
-		equals(store.items().length, 0, 'hdStore should contain 0 items')
+		equals(store.getCount(), 0, 'hdStore should contain 0 items')
 	});
 	
 	/* Test#12 */
@@ -147,8 +147,8 @@ $(document).ready(function(){
 		var miniStore = store.filter(function(o, k){
 			return k > 40 && k <= 90;
 		});
-		equals(store.items().length, 100, 'hdStore should be uneffected be miniStore');
-		equals(miniStore.items().length, 50, 'miniStore should contain 50 items')
+		equals(store.getCount(), 100, 'hdStore should be uneffected be miniStore');
+		equals(miniStore.getCount(), 50, 'miniStore should contain 50 items')
 		equals(
 			miniStore.filter(function(o, k){
 				return o.name === 'item41';
