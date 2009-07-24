@@ -4,13 +4,11 @@
  * Methods: add, exists, items, keys, remove, removeAll
  * 
  * @author Jon Ege Ronnenberg (Ronnenberg) & Halfdan
- * @version 2.0
+ * @version 2.1
  */
 var hdStore = function(){
 	//private vars/functions/objects goes here
 	var _dict = {};
-	// maintain count as variable to not be vulerable to prototyping of the Object class
-	var _count = 0;
 	return {
 		count: function(){
 			throw new Error('Not implemented.')
@@ -24,17 +22,15 @@ var hdStore = function(){
 		key: function(oldkey, newkey){
 			_dict[newkey] = _dict[oldkey];
 			this.remove(oldkey);
-			_count++;
 		},
 		key2: function(key){
 			return _dict[key];
 		},		
 		add: function(key, value){
 			_dict[key] = value;
-			_count++;
 		},
 		getCount: function(){// changed to getCount so that we can have count as a get in all non-IE browsers
-			return _count
+			return this.items().length;
 		},				
 		exists: function(key){
 			return _dict[key] ? true : false;
@@ -55,11 +51,9 @@ var hdStore = function(){
 		},
 		remove: function(key){
 			eval ("delete _dict." + key + ";");
-			_count--;
 		},
 		removeAll: function(){
 			_dict = {};
-			_count = 0;
 		},
 		/**
 	     * Filter by a function. Returns a <i>new</i> collection that has been filtered.
