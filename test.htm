@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>hdStore Unit Tests</title>
+		<style type="text/css">
+			#footer a{ margin-left: 1em; text-decoration:none; }
+			#footer p{ margin-left: 0.5em; }
+		</style>
+		
+		<!-- unit test stuff -->
+		<link href="unittest/testsuite.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="unittest/jquery.js"></script>
+		<script type="text/javascript" src="unittest/testrunner.js"></script>		
+		<!-- unit test stuff -->
+		<script type="text/javascript" src="hdStore.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// setup globale test environment
+			var store, n;
+			function setup(){
+				store = new hdStore(); // create new hdStore
+				n = 100; // number of elements in hdStore
+				while(n > 0)
+				{
+					n--;
+					store.add(n, { name: 'item' + n, value: Math.random() });
+				};
+				n = 100;
+			}
+			function teardown(){
+				store.removeAll();
+			}
+			
+			
+			
+			// test stuff - not unit test!
+			function clone(obj){
+			    if(obj == null || typeof(obj) != 'object')
+			        return obj;
+			
+			    var temp = new obj.constructor(); // changed (twice)
+			    for(var key in obj)
+			        temp[key] = clone(obj[key]);
+			
+			    return temp;
+			}
+		</script>
+		<!-- Jons tests -->
+		<script type="text/javascript" src="unittest/jon.js"></script>
+		<!-- Halfdans tests -->
+		<script type="text/javascript" src="unittest/halfdan.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				// check integrity of setup environment
+				/* Should be unnecessary but setup|teardown in lifecycle doesn't work
+				   see http://dev.jquery.com/ticket/4959 */
+				test('Final integrity test', function(){
+					expect(2);
+					equals(store.items().length, 0, '0 or there is a test that bleeds');
+					equals(n, 100, '100 or there is a test that bleeds');
+				});
+				
+				// no se
+				document.title = $('#title').text();
+			});			
+		</script>
+		<h1 id="title">hdStore Unit Tests</h1>
+        <h2 id="banner"></h2>
+		<h2 id="userAgent"></h2>
+        <ol id="tests"></ol>
+        <div id="results"></div>
+        <div id="main"></div>
+		<div id="show-tests"></div>
+		
+		<div id="footer">
+			<a href="test.htm">>> Reload page</a>
+			<br />
+			<a href="unittest/jon.js">See jon.js</a>
+			<br />
+			<a href="unittest/halfdan.js">See halfdan.js</a>
+			<p>TODO:</p>
+			<ol>
+				<li>
+					hdStore.remove(key) doesn't work when key is a number.
+					<ol>
+						<li>Add prefix letter to keys. Con: Can be tricky when end-user search for keys.</li>
+						<li>Implement _dict as an Array. Con: Key has to be the index of the Array... Or not? -><a href="http://www.hunlock.com/blogs/Mastering_Javascript_Arrays#quickIDX9">http://www.hunlock.com/blogs/Mastering_Javascript_Arrays#quickIDX9</a></li>
+						<li>Implement _dict as an linked Array. Con: Might be difficult to manage = more code.</li>
+						<li>Something better...</li>
+					</ol>
+				</li>
+				<li>Implement get &amp; set for hdStore.count. See comment at hdStore.getCount method.</li>
+				<li>Throw meaningful Error objects.</li>
+				<li>Document all public functions (jsDoc).</li>
+			</ol>
+			<p>Discussion topics:</p>
+			<ul>
+				<li>How do we want to implement the different browser save functions? It's a factory pattern but the different implementations to choose from are huge!</li>
+				<li>hdStore.add overwrites an old key if the new key has the same name.</li>
+				<li>hdStore.getCount doesn't actually count the items but is a private variable maintained by various methods. See test #5.3 and #5.4</li>
+				<li>Should hdStore.item be implemented with get &amp; set and then have hdStore.setItem &amp; hdStore.getItem?</li>
+				<li>Should we provide a way to clone hdStore? We could use the hdStore.filter method.</li>
+				<li>If hdStore.item(key, newItem) is called with a key that doesn't exist, a new item is created. Do we want this side-effect? #3</li>
+				<li>Chrome 2.0 does something fucked up with arrays, like auto-sort... Thus failing test #13.2 #13.3 and #14.2</li>
+			</ul>
+		</div>
+	</body>
+</html>
