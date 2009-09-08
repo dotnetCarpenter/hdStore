@@ -6,7 +6,7 @@
  * @author Jon Ege Ronnenberg (Ronnenberg) & Halfdan
  * @version 2.1
  */
-function hdStore(){
+var hdStore = function(){
 	//private vars/functions/objects goes here
 	var _dict = {};
 	
