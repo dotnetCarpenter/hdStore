@@ -2,20 +2,15 @@ hdStore aims to provide cross-browser persistent storage capabilities and simple
 
 TODO:
 
-1.  hdStore.remove(key) doesn't work when key is a number.
-      Add prefix letter to keys. Con: Can be tricky when end-user search for keys.
-      Implement _dict as an Array. Con: Key has to be the index of the Array... Or not? ->http://www.hunlock.com/blogs/Mastering_Javascript_Arrays#quickIDX9
-      Implement _dict as an linked Array. Con: Might be difficult to manage = more code.
-      Something better...
-2.  Implement get & set for hdStore.count. See comment at hdStore.getCount method.
-3.  Throw meaningful Error objects.
+1.  Implement get & set for hdStore.count and hdStore.item.
+2.  Throw meaningful Error objects.
+3.  Implement save method for < IE8.
 4.  Document all public functions (jsDoc).
 
 Discussion topics:
 
 How do we want to implement the different browser save functions? It's a factory pattern but the different implementations to choose from are huge!
-hdStore.add overwrites an old key if the new key has the same name.
-Should hdStore.item be implemented with get & set and then have hdStore.setItem & hdStore.getItem?
 Should we provide a way to clone hdStore? We could use the hdStore.filter method.
 If hdStore.item(key, newItem) is called with a key that doesn't exist, a new item is created. Do we want this side-effect? #3
 Chrome 2.0 does something fucked up with arrays, like auto-sort... Thus failing test #13.2 #13.3 and #14.2
+Opera 10 has changed behavior for try..catch statements from Opera 9, thus failing test #5.3
