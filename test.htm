@@ -104,8 +104,9 @@
 						</ol>
 					</strike>
 				</li>
-				<li>Implement get &amp; set for hdStore.count. See comment at hdStore.getCount method.</li>
+				<li>Implement get &amp; set for hdStore.count and hdStore.item.</li>
 				<li>Throw meaningful Error objects.</li>
+				<li>Implement save method for < IE8.</li>
 				<li>Document all public functions (jsDoc).</li>
 			</ol>
 			<p id="topics">Discussion topics:</p>
@@ -113,10 +114,11 @@
 				<li>How do we want to implement the different browser save functions? It's a factory pattern but the different implementations to choose from are huge!</li>
 				<li><strike>hdStore.add overwrites an old key if the new key has the same name.</strike> Keys should be unique!</li>
 				<li><strike>hdStore.getCount doesn't actually count the items but is a private variable maintained by various methods. See test #5.3 and #5.4</strike></li>
-				<li>Should hdStore.item be implemented with get &amp; set and then have hdStore.setItem &amp; hdStore.getItem?</li>
+				<li><strike>Should hdStore.item be implemented with get &amp; set and then have hdStore.setItem &amp; hdStore.getItem?</strike></li>
 				<li>Should we provide a way to clone hdStore? We could use the hdStore.filter method.</li>
 				<li>If hdStore.item(key, newItem) is called with a key that doesn't exist, a new item is created. Do we want this side-effect? #3</li>
 				<li>Chrome 2.0 does something fucked up with arrays, like auto-sort... Thus failing test #13.2 #13.3 and #14.2</li>
+				<li>Opera 10 has changed behavior for try..catch statements from Opera 9, thus failing test #5.3</li>
 			</ul>
 		</div>
 	</body>
