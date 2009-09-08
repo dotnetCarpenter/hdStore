@@ -144,10 +144,10 @@ $(document).ready(function(){
 	});
 	
 	/* Test#12 */
-	test('hdStore.filter method - missing scope tests', function(){
+	test('hdStore.filter method', function(){
 		setup();
 		
-		expect(3);
+		expect(4);
 		// miniStore will contain items between 40 and 90
 		var miniStore = store.filter(function(o, k){
 			return k > 40 && k <= 90;
@@ -160,6 +160,18 @@ $(document).ready(function(){
 			}).getCount(),
 			1
 		);
+		// scope test
+		var scopeObject = function(){
+			return {
+				value: 20
+			}
+		}();		
+		
+		var scopeFilter = store.filter(function(o, k){
+			return k < this.value;
+		}, scopeObject);
+		equals(scopeFilter.getCount(), scopeObject.value);
+		
 		teardown();
 	});
 	
