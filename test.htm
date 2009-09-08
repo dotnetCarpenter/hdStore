@@ -6,14 +6,16 @@
 		<style type="text/css">
 			#footer a{ margin-left: 1em; text-decoration:none; }
 			#footer p{ margin-left: 0.5em; }
+			#todo, #topics{ cursor: pointer; }
 		</style>
 		
 		<!-- unit test stuff -->
-		<link href="unittest/testsuite.css" rel="stylesheet" type="text/css" />
+		<link type="text/css" href="unittest/testsuite.css" rel="stylesheet" />
 		<script type="text/javascript" src="unittest/jquery.js"></script>
 		<script type="text/javascript" src="unittest/testrunner.js"></script>		
 		<!-- unit test stuff -->
 		<script type="text/javascript" src="hdStore.js"></script>
+<!--		<script type="text/javascript" src="hdStore_array.js"></script>-->
 	</head>
 	<body>
 		<script type="text/javascript">
@@ -33,14 +35,23 @@
 				store.removeAll();
 			}
 			
-			
+			jQuery(function($){
+				$('#todo').next().hide();
+				$('#todo').click(function(){
+					$(this).next().toggle();
+				});
+				$('#topics').next().hide();
+				$('#topics').click(function(){
+					$(this).next().toggle();
+				});
+			})(jQuery);
 			
 			// test stuff - not unit test!
 			function clone(obj){
 			    if(obj == null || typeof(obj) != 'object')
 			        return obj;
 			
-			    var temp = new obj.constructor(); // changed (twice)
+			    var temp = new obj.constructor();
 			    for(var key in obj)
 			        temp[key] = clone(obj[key]);
 			
@@ -80,25 +91,27 @@
 			<a href="unittest/jon.js">See jon.js</a>
 			<br />
 			<a href="unittest/halfdan.js">See halfdan.js</a>
-			<p>TODO:</p>
+			<p id="todo">TODO:</p>
 			<ol>
 				<li>
-					hdStore.remove(key) doesn't work when key is a number.
-					<ol>
-						<li>Add prefix letter to keys. Con: Can be tricky when end-user search for keys.</li>
-						<li>Implement _dict as an Array. Con: Key has to be the index of the Array... Or not? -><a href="http://www.hunlock.com/blogs/Mastering_Javascript_Arrays#quickIDX9">http://www.hunlock.com/blogs/Mastering_Javascript_Arrays#quickIDX9</a></li>
-						<li>Implement _dict as an linked Array. Con: Might be difficult to manage = more code.</li>
-						<li>Something better...</li>
-					</ol>
+					<strike>
+						hdStore.remove(key) doesn't work when key is a number.
+						<ol>
+							<li>Add prefix letter to keys. Con: Can be tricky when end-user search for keys.</li>
+							<li>Implement _dict as an Array. Con: Key has to be the index of the Array... Or not? -><a href="http://www.hunlock.com/blogs/Mastering_Javascript_Arrays#quickIDX9">http://www.hunlock.com/blogs/Mastering_Javascript_Arrays#quickIDX9</a></li>
+							<li>Implement _dict as an linked Array. Con: Might be difficult to manage = more code.</li>
+							<li>Something better...</li>
+						</ol>
+					</strike>
 				</li>
 				<li>Implement get &amp; set for hdStore.count. See comment at hdStore.getCount method.</li>
 				<li>Throw meaningful Error objects.</li>
 				<li>Document all public functions (jsDoc).</li>
 			</ol>
-			<p>Discussion topics:</p>
+			<p id="topics">Discussion topics:</p>
 			<ul>
 				<li>How do we want to implement the different browser save functions? It's a factory pattern but the different implementations to choose from are huge!</li>
-				<li>hdStore.add overwrites an old key if the new key has the same name.</li>
+				<li><strike>hdStore.add overwrites an old key if the new key has the same name.</strike> Keys should be unique!</li>
 				<li><strike>hdStore.getCount doesn't actually count the items but is a private variable maintained by various methods. See test #5.3 and #5.4</strike></li>
 				<li>Should hdStore.item be implemented with get &amp; set and then have hdStore.setItem &amp; hdStore.getItem?</li>
 				<li>Should we provide a way to clone hdStore? We could use the hdStore.filter method.</li>

@@ -6,9 +6,10 @@
  * @author Jon Ege Ronnenberg (Ronnenberg) & Halfdan
  * @version 2.1
  */
-var hdStore = function(){
+function hdStore(){
 	//private vars/functions/objects goes here
 	var _dict = {};
+	
 	return {
 		count: function(){
 			throw new Error('Not implemented.')
@@ -27,13 +28,18 @@ var hdStore = function(){
 			return _dict[key];
 		},		
 		add: function(key, value){
-			_dict[key] = value;
+			if (this.exists(key)) {
+				throw new Error('Key ' + key + ' already exists in hdStore');
+			} else {
+				_dict[key] = value;
+			}
 		},
 		getCount: function(){// changed to getCount so that we can have count as a get in all non-IE browsers
 			return this.items().length;
 		},				
 		exists: function(key){
-			return _dict[key] ? true : false;
+			// old: return _dict[key] ? true : false;
+			return key in _dict;
 		},		
 		items: function(){
 			var items = [];
@@ -50,7 +56,10 @@ var hdStore = function(){
 			return keys;
 		},
 		remove: function(key){
-			eval ("delete _dict." + key + ";");
+			with (hdStore) {
+				delete _dict[key];
+			}
+//			eval ("delete _dict." + key + ";");
 		},
 		removeAll: function(){
 			_dict = {};
@@ -96,5 +105,9 @@ var hdStore = function(){
 		}
 	}
 };
-// ?
-//hdStore.prototype = hdStore;
+/* ?
+hdStore.prototype = hdStore.prototype;
+hdStore.prototype.toString = function(){
+	return 'hdStore';
+}
+*/

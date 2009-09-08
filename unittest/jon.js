@@ -48,23 +48,28 @@ $(document).ready(function(){
 	});
 	/* Test#5 */
 	test('hdStore.add method', function(){
-		expect(4); // number assertions in this test case that should be run
+		expect(3); // number assertions in this test case that should be run
 		setup();
 		
 		// first assertion
 		equals(store.getCount(), 100, 'Counted with hdStore.getCount()');
 		// second assertion
-		equals(store.getCount(), 100, 'Counted with hdStore.items()');
+		equals(store.items().length, 100, 'Counted with hdStore.items()');
+		
 		
 		n = 100;
-		while(n > 0)
-		{
-			n--;
-			store.add(n, { name: 'item' + n, value: Math.random() });
-		};
+		try {
+			while (n > 0) {
+				n--;
+				store.add(n, {
+					name: 'item' + n,
+					value: Math.random()
+				});
+			};
+		} catch(e) {
+			ok(e.message == "Key 99 already exists in hdStore", "Key 99 already exists in hdStore");
+		}
 		n = 100;
-		equals(store.getCount(), 200, 'Counted with hdStore.getCount()');
-		equals(store.getCount(), 200, 'Counted with hdStore.items()');
 	});
 	/* Test#6 */
 	test('hdStore.getCount method', function(){
