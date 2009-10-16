@@ -1,6 +1,6 @@
 /**
- * Prototype
- * From http://www.w3schools.com/asp/asp_ref_dictionary.asp
+ * HdStore
+ * Base API modeled after http://www.w3schools.com/asp/asp_ref_dictionary.asp
  * Properties: count, item, key
  * Methods: add, exists, items, keys, remove, removeAll
  * 
@@ -11,7 +11,33 @@ var DEBUG = DEBUG || false;
 
 function hdStore(){
 	//private vars/functions/objects goes here
-	var _dict = {};
+	var _dict = {},
+		_events = [],
+	/**
+	 * Private method to fire events when the load or save methods are used
+	 * @param {String} eventtype Should be either load for load or unload for save
+	 */
+		_fireEvent = function(eventtype){
+			var success = false;
+			for (var n = 0; n < _events.length; n++){
+				if(_events[n].type == eventtype){
+					_events[n].handler();
+					success = true;					
+				}
+			}
+			return success;
+		/*
+var element = document.body;
+		if(document.fireEvent){
+			var e = document.createEventObject();
+        	return element.fireEvent('on'+eventtype,e);
+		} else if(document.createEvent){
+			var e = document.createEvent("HTMLEvents");
+	        e.initEvent(event, false, false); // event type,bubbling,cancelable
+	        return !element.dispatchEvent(e);
+		}
+*/
+	}
 
 	this.count = function(){
 		throw new Error('Not implemented.');
@@ -109,5 +135,28 @@ if (DEBUG)		console.log(a);
 	};
 	this.toString = function(){
 		return "hdStore";
+	};
+	/**
+	 * Add handler to the load/save method
+	 * @param {Object} event { handler: func, type: 'save'|'load' }
+	 */
+	this.addHandler = function(event){
+		if (event.type == "save" || event.type == "load") {
+			_events.push(event);
+		} else {
+			throw new Error('Not implemented.');
+		}
+	};
+	/**
+	 * @return true if save is successful
+	 */
+	this.save = function(){		
+		return _fireEvent('save');
+	};
+	/**
+	 * @return true if load is successful
+	 */
+	this.load = function(){		
+		return _fireEvent('load');
 	};
 }
