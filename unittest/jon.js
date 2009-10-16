@@ -1,5 +1,5 @@
 /**
- * @author Jon
+ * @author Jon Ege Ronnenberg
  */
 $(document).ready(function(){
 	module("Jons first test suite");
@@ -56,7 +56,7 @@ $(document).ready(function(){
 		// second assertion
 		equals(store.items().length, 100, 'Counted with hdStore.items()');
 		
-		
+		//TODO: the following closure creates an error in Opera 10
 		n = 100;
 		try {
 			while (n > 0) {
