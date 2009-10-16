@@ -21,7 +21,7 @@ function hdStore(){
 			var success = false;
 			for (var n = 0; n < _events.length; n++){
 				if(_events[n].type == eventtype){
-					_events[n].handler();
+					_events[n].handler.call();
 					success = true;					
 				}
 			}
