@@ -21,23 +21,12 @@ function hdStore(){
 			var success = false;
 			for (var n = 0; n < _events.length; n++){
 				if(_events[n].type == eventtype){
-					_events[n].handler.call();
+					_events[n].handler.call(_events[n].scope);
 					success = true;					
 				}
 			}
 			return success;
-		/*
-var element = document.body;
-		if(document.fireEvent){
-			var e = document.createEventObject();
-        	return element.fireEvent('on'+eventtype,e);
-		} else if(document.createEvent){
-			var e = document.createEvent("HTMLEvents");
-	        e.initEvent(event, false, false); // event type,bubbling,cancelable
-	        return !element.dispatchEvent(e);
-		}
-*/
-	}
+		};
 
 	this.count = function(){
 		throw new Error('Not implemented.');
@@ -138,7 +127,8 @@ if (DEBUG)		console.log(a);
 	};
 	/**
 	 * Add handler to the load/save method
-	 * @param {Object} event { handler: func, type: 'save'|'load' }
+	 * @param {Object} event { handler: func, type: 'save'|'load', scope:[scope] }
+	 * scope defines what this refers to. If omitted the scope is window
 	 */
 	this.addHandler = function(event){
 		if (event.type == "save" || event.type == "load") {
