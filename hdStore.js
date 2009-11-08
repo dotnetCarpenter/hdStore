@@ -5,14 +5,14 @@
  * Methods: add, exists, items, keys, remove, removeAll
  * 
  * @author Jon Ege Ronnenberg (Ronnenberg) & Halfdan
- * @version 2.3
+ * @version 0.4
  */
 var DEBUG = DEBUG || false;
 
 function hdStore(){
 	//private vars/functions/objects goes here
 	var _dict = {},
-		_events = [],
+		_events = hdStore.prototype.events,
 	/**
 	 * Private method to fire events when the load or save methods are used
 	 * @param {String} eventtype Should be either load for load or unload for save
@@ -21,7 +21,7 @@ function hdStore(){
 			var success = false;
 			for (var n = 0; n < _events.length; n++){
 				if(_events[n].type == eventtype){
-					_events[n].handler.call(_events[n].scope);
+					_events[n].handler.call(this);
 					success = true;					
 				}
 			}
@@ -126,18 +126,6 @@ if (DEBUG)		console.log(a);
 		return "hdStore";
 	};
 	/**
-	 * Add handler to the load/save method
-	 * @param {Object} event { handler: func, type: 'save'|'load', scope:[scope] }
-	 * scope defines what this refers to. If omitted the scope is window
-	 */
-	this.addHandler = function(event){
-		if (event.type == "save" || event.type == "load") {
-			_events.push(event);
-		} else {
-			throw new Error('Not implemented.');
-		}
-	};
-	/**
 	 * @return true if save is successful
 	 */
 	this.save = function(){		
@@ -150,3 +138,17 @@ if (DEBUG)		console.log(a);
 		return _fireEvent('load');
 	};
 }
+/* static properties/methods */
+hdStore.prototype.events = [];
+/**
+ * Add handler to the load/save method
+ * @param {Object} event { handler: func, type: 'save'|'load', scope:[scope] }
+ * scope defines what this refers to. If omitted the scope is window
+ */
+hdStore.prototype.addHandler = function(event){
+		if (event.type == "save" || event.type == "load") {
+			hdStore.prototype.events.push(event);
+		} else {
+			throw new Error('Not implemented.');
+		}
+	};
