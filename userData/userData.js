@@ -2,15 +2,15 @@
  * Security Alert  For security reasons, a UserData store is available only in the same directory and with the same protocol used to persist the store.
  * Security Alert  Using this behavior incorrectly can compromise the security of your application. Data in a UserData store is not encrypted and therefore not secure. Any application that has access to the drive where UserData is saved has access to the data. Therefore, it is recommended that you not persist sensitive data like credit card numbers. For more information, see Security Considerations: DHTML and Default Behaviors http://msdn.microsoft.com/en-us/library/ms531080(VS.85,lightweight).aspx 
  * 
- * Security Zone	Document Limit (KB)	Domain Limit (KB)
- *	Local Machine			128				1024
- *	Intranet				512			   10240
- *	Trusted Sites			128				1024
- *	Internet				128				1024
- *	Restricted				 64			     640
+ * Security Zone    Document Limit (KB)	Domain Limit (KB)
+ * Local Machine                128                1024
+ * Intranet                     512               10240
+ * Trusted Sites                128                1024
+ * Internet                     128                1024
+ * Restricted                    64                 640
  *  
  * @author Jon Ege Ronnenberg
- * @version 0.1
+ * @version 0.2
  * Alternative object to xml serializations
  * 1. http://tawani.blogspot.com/2006/12/serialize-javascript-objects-to-xml-for.html
  * 2. http://svn.mirekrusin.com/pub/javascript/to_xml/trunk/to_xml.js
