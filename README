@@ -1,15 +1,8 @@
-hdStore aims to provide cross-browser persistent storage capabilities and simple data manipulation
-
-TODO:
-
-1.  Implement get & set for hdStore.count and hdStore.item.
-2.  Throw meaningful Error objects.
-3.  Implement save method for < IE8.
-4.  Document all public functions (jsDoc).
+hdStore aims to provide cross-browser persistent storage capabilities and simple data manipulation.
+Different persistent storage capabilities are implemented through a plug-in system.
 
 Discussion topics:
 
-How do we want to implement the different browser save functions? It's a factory pattern but the different implementations to choose from are huge!
 Should we provide a way to clone hdStore? We could use the hdStore.filter method.
 If hdStore.item(key, newItem) is called with a key that doesn't exist, a new item is created. Do we want this side-effect? #3
 Chrome 2.0 does something fucked up with arrays, like auto-sort... Thus failing test #13.2 #13.3 and #14.2
