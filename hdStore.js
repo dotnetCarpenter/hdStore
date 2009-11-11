@@ -13,15 +13,16 @@ function hdStore(){
 	//private vars/functions/objects goes here
 	var _dict = {},
 		_events = hdStore.prototype.events,
+		that = this,
 	/**
 	 * Private method to fire events when the load or save methods are used
-	 * @param {String} eventtype Should be either load for load or unload for save
+	 * @param {String} eventtype Should be either load for loading persistent data or save for saving to persisten storage
 	 */
 		_fireEvent = function(eventtype){
 			var success = false;
 			for (var n = 0; n < _events.length; n++){
 				if(_events[n].type == eventtype){
-					_events[n].handler.call(this);
+					_events[n].handler.call(that);
 					success = true;					
 				}
 			}
@@ -120,6 +121,13 @@ if (DEBUG)		console.log(a);
 			a[i] = it[i];
 		}
 if (DEBUG)		console.log(a);
+		return a;
+	};
+	this.toArray3 = function(){
+		var a = new Array(this.getCount()+1);
+		for (var key in _dict){
+			a[key] = _dict[key];
+		}
 		return a;
 	};
 	this.toString = function(){

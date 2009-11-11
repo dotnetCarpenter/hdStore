@@ -2,7 +2,9 @@
  * @author Jon Ege Ronnenberg
  */
 $(document).ready(function(){
-	module("Unit test of hdStore event handling");
+/* Interferes with specific implementation tests
+ * 
+ 	module("Unit test of hdStore event handling");
 	test('hdStore.save method', function(){
 		expect(2);
 		
@@ -14,7 +16,7 @@ $(document).ready(function(){
 			}
 		});
 		ok(store.save(), 'Handler is found');
-		equals(hdStore.saveHandlerValue, "Hello world from save");
+		equals(store.saveHandlerValue, "Hello world from save");
 	});
 	test('hdStore.load method', function(){
 		expect(2);
@@ -23,11 +25,22 @@ $(document).ready(function(){
 		store.addHandler({
 			type: 'load',
 			handler: function(){
-				document.loadHandlerValue = "Hello world from load";
+				this.loadHandlerValue = "Hello world from load";
 			}
 		});
 		ok(store.load(), 'Handler is found');
-		equals(document.loadHandlerValue, "Hello world from load");
+		equals(store.loadHandlerValue, "Hello world from load");
 	});
-//	module("Unit test of IE implementation of hdStore");
+ */
+	module("Unit test of IE implementation of hdStore");
+	test('userData implementation', function(){
+		expect(2);
+		setup();
+		
+		ok(store.save(), 'Handler is found');
+		store.removeAll();
+		ok(store.load(), 'Handler is found');
+		
+		teardown();
+	});
 });
