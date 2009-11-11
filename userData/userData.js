@@ -19,24 +19,25 @@
  * 2. http://json.org/json2.js
  */
 hdStore.userData = function(){
+	var _getStore = function(){
+		if(!document.getElementById('x-hdStore-id')){
+			var docStore = document.createElement('div');
+			docStore.style.display = 'none';
+			docStore.addBehavior('#default#userdata');
+			docStore.id = 'x-hdStore-id';
+			return document.body.appendChild(docStore);
+		} else {
+			return document.getElementById('x-hdStore-id');
+		}
+	};
 	hdStore.prototype.addHandler({
 		type: 'save',
 		handler: function(){
 			// check if this implementation is used (< IE8)
 			if(!hdStore.userData.isUsed){ return; }
-			var docStore;
-			if(!document.getElementById('x-hdStore')){
-				docStore = document.createElement('div');
-				docStore.style.display = 'none';
-        		docStore.addBehavior('#default#userdata');
-				docStore.id = 'x-hdStore-id';
-				document.body.appendChild(docStore);
-			} else {
-				docStore = document.getElementById('x-hdStore');
-			}
-			
+			var docStore = _getStore();
 			docStore.setAttribute('x-hdStore-data', JSON.stringify(this.toArray3()));
-			docStore.save(this.id || 'x-hdStore');
+			docStore.save(this.id);
 		}
 	});
 	hdStore.prototype.addHandler({
@@ -44,8 +45,9 @@ hdStore.userData = function(){
 		handler: function(){
 			// check if this implementation is used (< IE8)
 			if(!hdStore.userData.isUsed){ return; }
-			var docStore = document.getElementById('x-hdStore-id');
-			docStore.load(this.id || 'x-hdStore');
+			var docStore = _getStore();
+			docStore.load(this.id);
+			if(docStore.getAttribute('x-hdStore-data') == null){ throw new Error('Data store ' + this.id + ' not found.'); }
 			var dataArray = JSON.parse(docStore.getAttribute('x-hdStore-data'));
 			for(var key in dataArray)
 			{
