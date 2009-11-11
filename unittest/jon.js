@@ -2,7 +2,7 @@
  * @author Jon Ege Ronnenberg
  */
 $(document).ready(function(){
-	module("Jons first test suite");
+	module("hdStore base Test Suit");
 	test('Check that we are unit testing hdStore', function(){
 		var store = new hdStore();
 		ok(store.toString() === "hdStore", 'This is a test of hdStore (and hdStore.toString method).');
