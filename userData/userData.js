@@ -36,13 +36,6 @@ hdStore.userData = function(){
 			}
 			
 			docStore.setAttribute('x-hdStore-data', JSON.stringify(this.toArray3()));
-			//docStore.setAttribute('x-hdStore-data', this.toArray3());
-			
-			/*
-			var k = this.keys(), it = this.items();
-			for(var i = 0; i < this.getCount(); i++){
-				docStore.setAttribute(k[i], it[i]);
-			}*/
 			docStore.save('x-hdStore');
 		}
 	});
