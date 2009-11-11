@@ -9,7 +9,7 @@
  */
 var DEBUG = DEBUG || false;
 
-function hdStore(){
+function hdStore(id){
 	//private vars/functions/objects goes here
 	var _dict = {},
 		_events = hdStore.prototype.events,
@@ -28,7 +28,8 @@ function hdStore(){
 			}
 			return success;
 		};
-
+		this.id = id || 'x-hdStore';
+		
 	this.count = function(){
 		throw new Error('Not implemented.');
 	};
