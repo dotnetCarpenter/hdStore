@@ -43,4 +43,26 @@ $(document).ready(function(){
 		
 		teardown();
 	});
+	test('different userData stores', function(){
+		expect(3);
+		setup();
+		
+		store.id = "baby";
+		store.save();
+		store.removeAll();
+		
+		var fastfood = new hdStore('fastfood');
+		fastfood.add(1, 'fries');
+		fastfood.add(2, 'shake');
+		fastfood.add(3, 'burger');
+		fastfood.save();
+		fastfood.removeAll();
+		
+		fastfood.load();
+		equals(fastfood.item(1), 'fries', 'Loaded fries');
+		equals(fastfood.item(2), 'shake', 'Loaded shakeg');
+		equals(fastfood.item(3), 'burger', 'Loaded burger');
+		
+		teardown();
+	});
 });
