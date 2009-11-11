@@ -36,7 +36,7 @@ hdStore.userData = function(){
 			}
 			
 			docStore.setAttribute('x-hdStore-data', JSON.stringify(this.toArray3()));
-			docStore.save('x-hdStore');
+			docStore.save(this.id || 'x-hdStore');
 		}
 	});
 	hdStore.prototype.addHandler({
@@ -45,7 +45,7 @@ hdStore.userData = function(){
 			// check if this implementation is used (< IE8)
 			if(!hdStore.userData.isUsed){ return; }
 			var docStore = document.getElementById('x-hdStore-id');
-			docStore.load('x-hdStore');
+			docStore.load(this.id || 'x-hdStore');
 			var dataArray = JSON.parse(docStore.getAttribute('x-hdStore-data'));
 			for(var key in dataArray)
 			{
