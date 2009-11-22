@@ -10,7 +10,7 @@
  * Restricted                    64                 640
  *  
  * @author Jon Ege Ronnenberg
- * @version 0.2
+ * @version 0.3
  * Alternative object to xml serializations
  * 1. http://tawani.blogspot.com/2006/12/serialize-javascript-objects-to-xml-for.html
  * 2. http://svn.mirekrusin.com/pub/javascript/to_xml/trunk/to_xml.js
@@ -56,6 +56,7 @@ hdStore.userData = function(){
 		}
 	});
 	return {
-		isUsed: typeof(document.body.style.behavior) == 'string'
+		isUsed: typeof(document.body.style.behavior) == 'string',
+		id: 'userData'
 	}
 }();
