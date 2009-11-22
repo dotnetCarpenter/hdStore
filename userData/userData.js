@@ -34,29 +34,44 @@ hdStore.userData = function(){
 		type: 'save',
 		handler: function(){
 			// check if this implementation is used (< IE8)
-			if(!hdStore.userData.isUsed){ return; }
-			var docStore = _getStore();
-			docStore.setAttribute('x-hdStore-data', JSON.stringify(this.toArray3()));
-			docStore.save(this.id);
+			if(!hdStore.userData.canBeUsed){ return; }
+			try {
+				var docStore = _getStore();
+				docStore.setAttribute('x-hdStore-data', JSON.stringify(this.toArray3()));
+				docStore.save(this.id);
+				return true;
+			}
+			catch(e){
+				if(console){ console.log(e); }
+				return false;
+			}
 		}
 	});
 	hdStore.prototype.addHandler({
 		type: 'load',
 		handler: function(){
 			// check if this implementation is used (< IE8)
-			if(!hdStore.userData.isUsed){ return; }
-			var docStore = _getStore();
-			docStore.load(this.id);
-			if(docStore.getAttribute('x-hdStore-data') == null){ throw new Error('Data store ' + this.id + ' not found.'); }
-			var dataArray = JSON.parse(docStore.getAttribute('x-hdStore-data'));
-			for(var key in dataArray)
-			{
-				this.add(key, dataArray[key]);
+			if(!hdStore.userData.canBeUsed){ return; }
+			try {
+				var docStore = _getStore();
+				docStore.load(this.id);
+				if (docStore.getAttribute('x-hdStore-data') == null) {
+					throw new Error('Data store ' + this.id + ' not found.');
+				}
+				var dataArray = JSON.parse(docStore.getAttribute('x-hdStore-data'));
+				for (var key in dataArray) {
+					this.add(key, dataArray[key]);
+				}
+				return true;
+			}
+			catch(e){
+				if(console){ console.log(e); }
+				return false;
 			}
 		}
 	});
 	return {
-		isUsed: typeof(document.body.style.behavior) == 'string',
+		canBeUsed: typeof(document.body.style.behavior) == 'string',
 		id: 'userData'
 	}
 }();
