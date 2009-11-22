@@ -5,7 +5,7 @@
  * Methods: add, exists, items, keys, remove, removeAll
  * 
  * @author Jon Ege Ronnenberg (Ronnenberg) & Halfdan
- * @version 0.4
+ * @version 0.5
  */
 var DEBUG = DEBUG || false;
 
@@ -15,15 +15,15 @@ function hdStore(id){
 		_events = hdStore.prototype.events,
 		that = this,
 	/**
-	 * Private method to fire events when the load or save methods are used
+	 * Private method to fire events when the load or save methods are used.
+	 * *this* is your instance of hdStore.
 	 * @param {String} eventtype Should be either load for loading persistent data or save for saving to persisten storage
 	 */
 		_fireEvent = function(eventtype){
 			var success = false;
 			for (var n = 0; n < _events.length; n++){
 				if(_events[n].type == eventtype){
-					_events[n].handler.call(that);
-					success = true;					
+					success = _events[n].handler.call(that);
 				}
 			}
 			return success;
@@ -155,9 +155,9 @@ hdStore.prototype.events = [];
  * scope defines what this refers to. If omitted the scope is window
  */
 hdStore.prototype.addHandler = function(event){
-		if (event.type == "save" || event.type == "load") {
-			hdStore.prototype.events.push(event);
-		} else {
-			throw new Error('Not implemented.');
-		}
-	};
+	if (event.type == "save" || event.type == "load") {
+		hdStore.prototype.events.push(event);
+	} else {
+		throw new Error('Not implemented.');
+	}
+};
