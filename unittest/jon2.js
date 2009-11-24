@@ -36,10 +36,10 @@ $(document).ready(function(){
 	test('userData implementation', function(){
 		expect(2);
 		setup();
-		
-		ok(store.save(), 'Handler is found');
+
+		ok(store.save(), 'Found save handler');
 		store.removeAll();
-		ok(store.load(), 'Handler is found');
+		ok(store.load(), 'Found load handler');
 		
 		teardown();
 	});
@@ -60,7 +60,7 @@ $(document).ready(function(){
 		
 		fastfood.load();
 		equals(fastfood.item(1), 'fries', 'Loaded fries');
-		equals(fastfood.item(2), 'shake', 'Loaded shakeg');
+		equals(fastfood.item(2), 'shake', 'Loaded shake');
 		equals(fastfood.item(3), 'burger', 'Loaded burger');
 		
 		teardown();
