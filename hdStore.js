@@ -21,15 +21,14 @@ function hdStore(id){
 		 * @param {String} eventtype Should be either load for loading persistent data or save for saving to persisten storage
 		 */
 		_fireEvent = function(eventtype){
-			var success = false;
 			for (var n = 0; n < _events.length; n++){
 				if(_events[n].type == eventtype){
-					for(var priority in hdStore.Priorities){
-						if(priority.canBeUsed){ return _events[n].handler.call(that); }
+					for(var storageMethod in hdStore.Priorities){
+						if(hdStore.Priorities[storageMethod].canBeUsed){ return _events[n].handler.call(that); }
 					}
 				}
 			}
-			return success;
+			return false;
 		};
 	this.id = id || 'x-hdStore';
 		
