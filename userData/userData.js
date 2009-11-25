@@ -71,7 +71,6 @@ hdStore.userData = function(){
 		}
 	});
 	return {
-		canBeUsed: typeof(document.body.style.behavior) == 'string',
-		id: 'userData'
+		canBeUsed: typeof(document.body.style.behavior) == 'string'
 	}
 }();
