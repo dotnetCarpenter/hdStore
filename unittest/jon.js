@@ -56,7 +56,7 @@ $(document).ready(function(){
 		// second assertion
 		equals(store.items().length, 100, 'Counted with hdStore.items()');
 		
-		//TODO: the following closure creates an error in Opera 10
+		//TODO: the following closure creates an error in Opera 10.x - fixed in 10.10
 		n = 100;
 		try {
 			while (n > 0) {
