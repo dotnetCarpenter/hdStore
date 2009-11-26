@@ -36,6 +36,6 @@ hdStore.localStorage = function(){
 		}
 	});
 	return {
-		canBeUsed: localStorage ? true : false
+		canBeUsed: typeof(localStorage) != 'undefined'
 	}
 }();
