@@ -10,7 +10,7 @@
  * Restricted                    64                 640
  *  
  * @author Jon Ege Ronnenberg
- * @version 0.3
+ * @version 0.4
  * IE DOM ready http://peter.michaux.ca/articles/the-window-onload-problem-still
  * 
  * Alternative object to xml serializations
@@ -21,30 +21,20 @@
  * 2. http://json.org/json2.js
  */
 hdStore.userData = function(){
-	var _getStore = function(){
-		if(!document.getElementById('x-hdStore-id')){
-			var docStore = document.createElement('div');
-			docStore.style.display = 'none';
-			docStore.addBehavior('#default#userdata');
-			docStore.id = 'x-hdStore-id';
-			return document.body.appendChild(docStore);
-		} else {
-			return document.getElementById('x-hdStore-id');
-		}
-	};
 	hdStore.prototype.addHandler({
 		type: 'save',
 		handler: function(){
 			// check if this implementation is used (< IE8)
 			if(!hdStore.userData.canBeUsed){ return; }
 			try {
-				var docStore = _getStore();
+				var docStore = document.documentElement;
+				docStore.addBehavior('#default#userdata');
 				docStore.setAttribute('x-hdStore-data', JSON.stringify(this.toArray3()));
 				docStore.save(this.id);
 				return true;
 			}
 			catch(e){
-				if(console){ console.log(e); }
+				if(console){ console.log(e.message); }
 				return false;
 			}
 		}
@@ -55,7 +45,7 @@ hdStore.userData = function(){
 			// check if this implementation is used (< IE8)
 			if(!hdStore.userData.canBeUsed){ return; }
 			try {
-				var docStore = _getStore();
+				var docStore = document.documentElement;
 				docStore.load(this.id);
 				if (docStore.getAttribute('x-hdStore-data') == null) {
 					throw new Error('Data store ' + this.id + ' not found.');
@@ -67,7 +57,7 @@ hdStore.userData = function(){
 				return true;
 			}
 			catch(e){
-				if(console){ console.log(e); }
+				if(console){ console.log(e.message); }
 				return false;
 			}
 		}
@@ -82,4 +72,49 @@ hdStore.userData = function(){
 		hdStore.userData();
 		clearInterval(hdStore.userData.invokationId);
 	}
-}, 10);*/
+}, 10);
+*/
+/*
+ script tag defer
+	document.write("<script id=__ie_onload defer src=\"//:\"><\/script>");
+	var script = document.getElementById("__ie_onload");
+	script.onreadystatechange = function() {
+		if (this.readyState == "complete") {
+			domReadyEvent.run(); // call the onload handler
+		}
+	};
+*/
+/*
+ var timer;
+
+  function fireContentLoadedEvent() {
+    if (document.loaded) return;
+    if (timer) window.clearTimeout(timer);
+    document.loaded = true;
+    document.fire('dom:loaded');
+  }
+
+  function checkReadyState() {
+    if (document.readyState === 'complete') {
+      document.stopObserving('readystatechange', checkReadyState);
+      fireContentLoadedEvent();
+    }
+  }
+
+  function pollDoScroll() {
+    try { document.documentElement.doScroll('left'); }
+    catch(e) {
+      timer = pollDoScroll.defer();
+      return;
+    }
+    fireContentLoadedEvent();
+  }
+
+  if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', fireContentLoadedEvent, false);
+  } else {
+    document.observe('readystatechange', checkReadyState);
+    if (window == top)
+      timer = pollDoScroll.defer();
+  }
+*/
