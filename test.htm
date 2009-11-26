@@ -16,7 +16,10 @@
 		<!-- END unit test stuff -->
 		<script type="text/javascript" src="json2.js"></script>
 		<script type="text/javascript" src="hdStore.js"></script>
-	<!-- moved for test	<script type="text/javascript" src="priority.js"></script> -->
+		
+		<script type ="text/javascript" src="localStorage/localStorage.js"></script>
+		<script type ="text/javascript" src="userData/userData.js"></script>
+		<script type="text/javascript" src="priority.js"></script>
 		
 <!--		<script type="text/javascript" src="hdStore_array.js"></script>-->
 	</head>
@@ -101,10 +104,12 @@
 				<li>Should we provide a way to clone hdStore? We could use the hdStore.filter method.</li>
 				<li>If hdStore.item(key, newItem) is called with a key that doesn't exist, a new item is created. Do we want this side-effect? #3</li>
 				<li>Chrome 2.0 does something fucked up with arrays, like auto-sort... Thus failing test #13.2 #13.3 and #14.2</li>
-				<li>Opera 10 has changed behavior for try..catch statements from Opera 9, thus failing test #5.3</li>
+				<li><strike>Opera 10 has changed behavior for try..catch statements from Opera 9, thus failing test #5.3</strike> fixed in Opera 10.10</li>
 			</ul>
 		</div>
 	</body>
+	<!--
 <script type ="text/javascript" src="userData/userData.js"></script>
 <script type="text/javascript" src="priority.js"></script>
+-->
 </html>
