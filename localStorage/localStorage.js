@@ -27,13 +27,15 @@ hdStore.localStorage = function(){
 		type: 'save',
 		handler: function(){
 			return _handler(this, 'save');
-		}
+		},
+		id: 'localStorage'
 	});
 	hdStore.prototype.addHandler({
 		type: 'load',
 		handler: function(){
 			return _handler(this, 'load');
-		}
+		},
+		id: 'localStorage'
 	});
 	return {
 		canBeUsed: typeof(localStorage) != 'undefined'

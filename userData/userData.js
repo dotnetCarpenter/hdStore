@@ -24,7 +24,7 @@ hdStore.userData = function(){
 	hdStore.prototype.addHandler({
 		type: 'save',
 		handler: function(){
-			// check if this implementation is used (< IE8)
+			// check if this implementation is used
 			if(!hdStore.userData.canBeUsed){ return; }
 			try {
 				var docStore = document.documentElement;
@@ -37,12 +37,13 @@ hdStore.userData = function(){
 				if(console){ console.log(e.message); }
 				return false;
 			}
-		}
+		},
+		id: 'userData'
 	});
 	hdStore.prototype.addHandler({
 		type: 'load',
 		handler: function(){
-			// check if this implementation is used (< IE8)
+			// check if this implementation is used
 			if(!hdStore.userData.canBeUsed){ return; }
 			try {
 				var docStore = document.documentElement;
@@ -60,10 +61,11 @@ hdStore.userData = function(){
 				if(console){ console.log(e.message); }
 				return false;
 			}
-		}
+		},
+		id: 'userData'
 	});
 	return {
-		canBeUsed: document.documentElement.addBehavior ? true : false//typeof(document.body.style.behavior) == 'string' || false
+		canBeUsed: document.documentElement.addBehavior ? true : false
 	}
 }();
 // invocate hdStore.userData when the DOM is ready - testing every 10th mili-second

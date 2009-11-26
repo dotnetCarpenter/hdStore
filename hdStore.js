@@ -24,7 +24,9 @@ function hdStore(id){
 			for (var n = 0; n < _events.length; n++){
 				if(_events[n].type == eventtype){
 					for(var storageMethod in hdStore.Priorities){
-						if(hdStore.Priorities[storageMethod].canBeUsed){ return _events[n].handler.call(that); }
+						if(hdStore.Priorities[storageMethod].canBeUsed && _events[n].id == storageMethod){
+							return _events[n].handler.call(that);
+						}
 					}
 				}
 			}
