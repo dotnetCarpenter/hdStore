@@ -11,6 +11,8 @@
  *  
  * @author Jon Ege Ronnenberg
  * @version 0.3
+ * IE DOM ready http://peter.michaux.ca/articles/the-window-onload-problem-still
+ * 
  * Alternative object to xml serializations
  * 1. http://tawani.blogspot.com/2006/12/serialize-javascript-objects-to-xml-for.html
  * 2. http://svn.mirekrusin.com/pub/javascript/to_xml/trunk/to_xml.js
@@ -71,6 +73,13 @@ hdStore.userData = function(){
 		}
 	});
 	return {
-		canBeUsed: typeof(document.body.style.behavior) == 'string'
+		canBeUsed: document.documentElement.addBehavior ? true : false//typeof(document.body.style.behavior) == 'string' || false
 	}
 }();
+// invocate hdStore.userData when the DOM is ready - testing every 10th mili-second
+/*hdStore.userData.invokationId = setInterval(function(){
+	if (window.document.readyState == 'complete') {
+		hdStore.userData();
+		clearInterval(hdStore.userData.invokationId);
+	}
+}, 10);*/
