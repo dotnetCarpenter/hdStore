@@ -5,11 +5,11 @@
  * Methods: add, exists, items, keys, remove, removeAll
  * 
  * @author Jon Ege Ronnenberg (Ronnenberg) & Halfdan
- * @version 0.5
+ * @version 0.6
  */
 var DEBUG = DEBUG || false;
 
-function hdStore(id){
+var hdStore = function(id){
 	//private vars/functions/objects goes here
 	var _dict = {},
 		_events = hdStore.prototype.events,
@@ -33,10 +33,6 @@ function hdStore(id){
 			return false;
 		};
 	this.id = id || 'x-hdStore';
-		
-	this.count = function(){
-		throw new Error('Not implemented.');
-	};
 	this.item = function(key, newitem){
 		if(newitem){
 			_dict[key] = newitem;
@@ -150,6 +146,10 @@ if (DEBUG)		console.log(a);
 	this.load = function(){		
 		return _fireEvent('load');
 	};
+}
+/* getter/setter */
+hdStore.prototype = {
+	get count(){ return this.items().length; }
 }
 /* static properties/methods */
 hdStore.prototype.events = [];
