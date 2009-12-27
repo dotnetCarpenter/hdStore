@@ -148,9 +148,14 @@ if (DEBUG)		console.log(a);
 	};
 }
 /* getter/setter */
+/* TODO: refactor to seperate js file (which can be excluded from IE)
+@cc_on
+@if (!@_jscript)
+*/
 hdStore.prototype = {
 	get count(){ return this.items().length; }
 }
+/*@end*/
 /* static properties/methods */
 hdStore.prototype.events = [];
 /**
