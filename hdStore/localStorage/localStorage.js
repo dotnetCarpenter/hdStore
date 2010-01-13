@@ -9,7 +9,7 @@ hdStore.localStorage = function(){
 		if(!hdStore.localStorage.canBeUsed){ return; }
 		try {
 			if (type == 'save') {
-				localStorage[store.id] = JSON.stringify(store.toArray3());
+				localStorage[store.id] = JSON.stringify(store.toArray());
 			}
 			else {
 				var dataArray = JSON.parse(localStorage[store.id]);
