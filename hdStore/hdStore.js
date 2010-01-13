@@ -1,15 +1,16 @@
 /**
  * HdStore
  * Base API modeled after http://www.w3schools.com/asp/asp_ref_dictionary.asp
- * Properties: count, item, key
- * Methods: add, exists, items, keys, remove, removeAll
+ * Properties: id (count, item, key is not implemented as properties but as fields)
+ * Fields: getCount, getItem, setItem, getKey, setKey
+ * Methods: add, exists, items, keys, remove, removeAll, toArray, filter, save, load, addHandler, toString
  * 
  * @author Jon Ege Ronnenberg (Ronnenberg) & Halfdan
- * @version 0.6
+ * @version 0.7
  */
 var DEBUG = DEBUG || false;
 
-var hdStore = function(id){
+function hdStore(id){
 	//private vars/functions/objects goes here
 	var _dict = {},
 		_events = hdStore.prototype.events,
@@ -95,7 +96,7 @@ if (DEBUG)	console.log(keys);
      * @return {Dictionary} The new filtered collection
      */
 	this.filter = function(fn, scope){
-		var filteredDict = new hdStore();
+		var filteredDict = new hdStore(this.id);
 		var k = this.keys(), it = this.items();
 		for(var i = 0; i < this.getCount(); i++){
 			if(fn.call(scope||this, it[i], k[i])){
@@ -106,33 +107,13 @@ if (DEBUG)	console.log(keys);
 	};
 	this.toArray = function(){
 		var a = new Array(this.getCount()+1);
-		var k = this.keys(), it = this.items();
-		for (var i = 0; i < this.getCount(); i++){
-			a[i] = [];
-			a[i][0] = k[i];
-			a[i][1] = it[i];
-		}
-if (DEBUG)		console.log(a);
-		return a;
-	};
-	this.toArray2 = function(){
-		var a = new Array(this.getCount()+1);
-		var it = this.items();
-		for (var i = 0; i < this.getCount(); i++){
-			a[i] = it[i];
-		}
-if (DEBUG)		console.log(a);
-		return a;
-	};
-	this.toArray3 = function(){
-		var a = new Array(this.getCount()+1);
 		for (var key in _dict){
 			a[key] = _dict[key];
 		}
 		return a;
 	};
 	this.toString = function(){
-		return "hdStore";
+		return this.id + " instance of hdStore";
 	};
 	/**
 	 * @return true if save is successful
@@ -148,14 +129,15 @@ if (DEBUG)		console.log(a);
 	};
 }
 /* getter/setter */
-/* TODO: refactor to seperate js file (which can be excluded from IE)
-@cc_on
-@if (!@_jscript)
-*/
-hdStore.prototype = {
-	get count(){ return this.items().length; }
-}
-/*@end*/
+/* TODO: refactor to seperate js file (which can be excluded from IE)*/
+/*if (!hdStore.__defineGetter) {
+	alert('hep');
+	hdStore.prototype = {
+		 get count(){
+			return this.items().length;
+		}
+	}
+}*/
 /* static properties/methods */
 hdStore.prototype.events = [];
 /**
