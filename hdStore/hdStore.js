@@ -9,7 +9,7 @@
  * @version 0.7
  */
 function hdStore(id){
-	//private vars/functions/objects goes here
+	
 	try {
 		JSON.parse('{ }');
 	} catch (err) {
@@ -18,7 +18,7 @@ function hdStore(id){
 		script.src = 'dependencies/json2.js';
 		document.getElementsByTagName('head')[0].appendChild(script);
 	}
-	
+	//private vars/functions/objects goes here
 	var _dict = {},
 		_events = hdStore.prototype.events,
 		that = this,
