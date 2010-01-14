@@ -33,21 +33,32 @@ function hdStore(id){
 			}
 			return false;
 		};
+	/* properties */
 	this.id = id || 'x-hdStore';
-	this.item = function(key, newitem){
-		if(newitem){
-			_dict[key] = newitem;
-		}
-		return _dict[key];
+	/* fields */
+	this.getCount = function(){
+		// using __count__ to speed up getCount in FF
+		return _dict.__count__ || this.items().length;
 	};
-	this.key = function(oldkey, newkey){
+	this.setKey = function(oldkey, newkey){
 		_dict[newkey] = _dict[oldkey];
 		this.remove(oldkey);
 	};
 	
-	this.key2 = function(key){
+	this.getKey = function(key){
 		return _dict[key];
 	};
+	this.getItem = function(key){
+		return _dict[key];
+	};
+	this.setItem = function(key, item){
+		if(item){
+			return _dict[key] = item;
+		}
+		throw new Error('No item provided');
+	};
+	
+	/* methods */
 	this.add = function(key, value){
 		if (this.exists(key)) {
 			throw new Error('Key ' + key + ' already exists in hdStore');
@@ -55,14 +66,12 @@ function hdStore(id){
 			_dict[key] = value;
 		}
 	};
-	this.getCount = function(){// changed to getCount so that we can have count as a get in all non-IE browsers
-		return this.items().length;
-	};
 	this.exists = function(key){
 		// old: return _dict[key] ? true : false;
 		return key in _dict;
 	};
 	this.items = function(){
+		// should we implement hasOwnProperty check?
 		var items = [];
 		for (var key in _dict){
 			items.push(_dict[key]);
