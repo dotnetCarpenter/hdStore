@@ -12,6 +12,15 @@ var DEBUG = DEBUG || false;
 
 function hdStore(id){
 	//private vars/functions/objects goes here
+	try {
+		JSON.parse('{ }');
+	} catch (err) {
+		var script = document.createElement('script');
+		script.type = 'text/javascript';
+		script.src = 'dependencies/json2.js';
+		document.getElementsByTagName('head')[0].appendChild(script);
+	}
+	
 	var _dict = {},
 		_events = hdStore.prototype.events,
 		that = this,
