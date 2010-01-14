@@ -102,7 +102,7 @@
 				<li><strike>hdStore.getCount doesn't actually count the items but is a private variable maintained by various methods. See test #5.3 and #5.4</strike></li>
 				<li><strike>Should hdStore.item be implemented with get &amp; set and then have hdStore.setItem &amp; hdStore.getItem?</strike></li>
 				<li>Should we provide a way to clone hdStore? We could use the hdStore.filter method.</li>
-				<li>If hdStore.item(key, newItem) is called with a key that doesn't exist, a new item is created. Do we want this side-effect? #3</li>
+				<li><strike>If hdStore.item(key, newItem) is called with a key that doesn't exist, a new item is created. Do we want this side-effect? #3</strike></li>
 				<li>Chrome 2.0 does something fucked up with arrays, like auto-sort... Thus failing test #13.2 #13.3 and #14.2</li>
 				<li><strike>Opera 10 has changed behavior for try..catch statements from Opera 9, thus failing test #5.3</strike> fixed in Opera 10.10</li>
 			</ul>
