@@ -8,8 +8,6 @@
  * @author Jon Ege Ronnenberg (Ronnenberg) & Halfdan
  * @version 0.7
  */
-var DEBUG = DEBUG || false;
-
 function hdStore(id){
 	//private vars/functions/objects goes here
 	try {
@@ -85,7 +83,6 @@ function hdStore(id){
 		for (var key in _dict){
 			items.push(_dict[key]);
 		}
-if (DEBUG)	console.log(items);
 		return items;
 	};
 	this.keys = function(){
@@ -93,7 +90,6 @@ if (DEBUG)	console.log(items);
 		for (var key in _dict){
 			keys.push(key);
 		}
-if (DEBUG)	console.log(keys);
 		return keys;
 	};
 	this.remove = function(key){

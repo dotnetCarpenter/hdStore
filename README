@@ -12,5 +12,6 @@ Opera 10 (but not from Opera 10.10) has changed behavior for try..catch statemen
 Version history
 * hdStore 0.7
   + finalized API (removed getter/setter functions for the time being)
+  + removed debuggin TOKENS
 * hdStore 0.6
   + hdStore.count is now a getter function
