@@ -121,8 +121,8 @@ function hdStore(id){
 	};
 	this.toArray = function(){
 		var a = new Array(this.getCount()+1);
-		for (var key in _dict){
-			a[key] = _dict[key];
+		for (var key in this._dict){
+			a[key] = this._dict[key];
 		}
 		return a;
 	};
@@ -163,6 +163,6 @@ hdStore.prototype.addHandler = function(event){
 	if (event.type == "save" || event.type == "load") {
 		hdStore.prototype.events.push(event);
 	} else {
-		throw new Error('Not implemented.');
+		throw new Error(event.type + ' type not implemented.');
 	}
 };
