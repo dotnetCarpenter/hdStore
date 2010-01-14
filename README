@@ -6,10 +6,11 @@ Supports: IE5+, FF3.5, Safari4
 Discussion topics:
 
 Should we provide a way to clone hdStore? We could use the hdStore.filter method.
-If hdStore.item(key, newItem) is called with a key that doesn't exist, a new item is created. Do we want this side-effect? #3
 Chrome 2.0 does something fucked up with arrays, like auto-sort... Thus failing test #13.2 #13.3 and #14.2
-Opera 10 has changed behavior for try..catch statements from Opera 9, thus failing test #5.3
+Opera 10 (but not from Opera 10.10) has changed behavior for try..catch statements from Opera 9, thus failing test #5.3
 
 Version history
+* hdStore 0.7
+  + finalized API (removed getter/setter functions for the time being)
 * hdStore 0.6
   + hdStore.count is now a getter function
