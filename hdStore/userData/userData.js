@@ -64,9 +64,7 @@ hdStore.userData = function(){
 		},
 		id: 'userData'
 	});
-	return {
-		canBeUsed: document.documentElement.addBehavior ? true : false
-	}
+	return document.documentElement.addBehavior ? true : false;
 }();
 // invocate hdStore.userData when the DOM is ready - testing every 10th mili-second
 /*hdStore.userData.invokationId = setInterval(function(){

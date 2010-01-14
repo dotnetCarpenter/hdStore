@@ -5,9 +5,9 @@
  */
 hdStore.Priorities = {
 	localStorage: {
-		canBeUsed: hdStore.localStorage.canBeUsed
+		canBeUsed: hdStore.localStorage ? true : false
 	},
 	userData: {
-		canBeUsed: hdStore.userData.canBeUsed
-	}
+		canBeUsed: hdStore.userData ? true : false
+	}	
 };

@@ -6,7 +6,7 @@
  */
 hdStore.localStorage = function(){
 	function _handler(store, type){
-		if(!hdStore.localStorage.canBeUsed){ return; }
+		if(!hdStore.localStorage){ return; }
 		try {
 			if (type == 'save') {
 				localStorage[store.id] = JSON.stringify(store.toArray());
@@ -37,7 +37,5 @@ hdStore.localStorage = function(){
 		},
 		id: 'localStorage'
 	});
-	return {
-		canBeUsed: typeof(localStorage) != 'undefined'
-	}
+	return typeof(localStorage) != 'undefined';
 }();
