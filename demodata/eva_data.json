@@ -1,0 +1,111 @@
+{
+    "replyarray": {
+        "reply": [
+            {
+                "confidence": 1,
+                "statementId": 1855,
+                "reaction": 188,
+                "category": 41,
+                "answer": "Telia Fri Familie er en service, der giver op til 6 Telia mobil numre mulighed for, at ringe gratis mellem hinanden. ",
+                "officialQuestion": "Hvad er Telia Fri Familie",
+                "officialQuestionId": 195,
+                "image": {
+                    "path": "figurer\/eva2",
+                    "name": "smiling.swf",
+                    "width": 168,
+                    "height": 135 
+                },
+                "links": {
+                    "link": [
+                        {
+                            "url": "http: \/\/telia.dk\/frifamilie",
+                            "titleText": "Læs mere om Telia Fri Familie ",
+                            "pushType": 21,
+                            "pushTypeString": "text" 
+                        } 
+                    ] 
+                },
+                "statementIds": "",
+                "statements": [
+                    "" 
+                ] 
+            } 
+        ] 
+    },
+    "reply": [
+        {
+            "confidence": 1,
+            "statementId": 1981,
+            "reaction": 224,
+            "category": 0,
+            "answer": "Mobiz er et mobilabonnement til erhvervskunder. Det skræddersys til netop jeres behov med hensyn til pris og funktionaliteter.",
+            "officialQuestion": "Hvad er Mobiz",
+            "officialQuestionId": 238,
+            "image": {
+                "path": "figurer\/eva2",
+                "name": "neutral.swf",
+                "width": 168,
+                "height": 135 
+            },
+            "links": {
+                "link": [
+                    {
+                        "url": "http: \/\/telia.dk\/erhverv\/produkter\/",
+                        "titleText": "Læs mere om vores erhvervsprodukter ",
+                        "pushType": 21,
+                        "pushTypeString": "text" 
+                    } 
+                ] 
+            },
+            "statementIds": "",
+            "statements": [
+                "" 
+            ] 
+        },
+        {
+            "confidence": 1,
+            "statementId": 160,
+            "reaction": 166,
+            "category": 41,
+            "answer": "ICE er en forkortelse af In Case of Emergency. Hvis du gemmer dine pårørendes telefonnumre som \"ICE\", kan redningsfolk hurtigt finde kontaktinformation, hvis du er ude for en ulykke.\r\n",
+            "officialQuestion": "Hvad er ICE",
+            "officialQuestionId": 159,
+            "image": {
+                "path": "figurer\/eva2",
+                "name": "smiling.swf",
+                "width": 168,
+                "height": 135 
+            },
+            "links": "",
+            "statementIds": [
+                "" 
+            ] 
+        } 
+    ],
+    "statements": [
+        {
+            "reply": {
+                "confidence": 1,
+                "statementId": 342,
+                "reaction": 184,
+                "category": 41,
+                "answer": "3G er en forkortelse for 3. generation mobilteknologi der giver mulighed for højere hastighed på dataoverførsel.",
+                "officialQuestion": "Hvad er 3G",
+                "officialQuestionId": 193,
+                "image": {
+                    "path": "figurer\/eva2",
+                    "name": "turning.swf",
+                    "width": 168,
+                    "height": 135 
+                },
+                "links": "",
+                "statementIds": [
+                    "" 
+                ] 
+            },
+            "statements": [
+                "" 
+            ] 
+        }
+    ]
+}

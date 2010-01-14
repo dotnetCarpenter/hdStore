@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <keys>
+ 	<key id='filmlist'>
+ 		<item>{"products":[{"name": "thespiritdvd","img": "0_default.jpg","flag": "just_added","thumb": "0_default_t.jpg","is_available": true,   "availability": "in_stock",            "comment": null,            "shortdesc": "Legendariske Will Eisners univers, som actionfilm",            "id": 5,            "title": "The Spirit",            "can_be_sold": true         },        {            "name": "openseasonbundle",            "img": "0_default.jpg",            "flag": "just_added",            "thumb": "0_default_t.jpg",            "is_available": true,            "availability": "in_stock",            "comment": null,            "shortdesc": "Sammen med &quot;Boog &amp; Elliot 2 – Vilde venner mod husdyrene&quot; får du også &quot;Boog &amp; Elliot - Vilde venner&quot;",            "id": 6,            "title": "Boog & Elliot 2",            "can_be_sold": true}]}</item>
+	</key>
+</keys>
+	
