@@ -19,11 +19,11 @@ module("hdStore Core Test", {
 	}
 });
 /* Test#1 */
-test('Check that we are unit testing hdStore', 1, function(){
+test('id and toString', 1, function(){
 	ok(this.store.toString() === this.store.id + " instance of hdStore", 'This is a test of hdStore (and hdStore.toString method).');
 });
 /* Test#2 */
-test('getItem/setItem method', 3, function(){
+test('getItem and setItem methods', 3, function(){
 	// testing edge cases
 	var item0 = { name: 'item0', value: 0 };
 	var item100 = { name: 'item100', value: 100 };
@@ -34,15 +34,23 @@ test('getItem/setItem method', 3, function(){
 	// simple retrieve test
 	equals(this.store.getItem('52').name, 'item52', 'Retrieve item with name item52');
 });
-
+/* Test#3 */
+	test('setKey and getKey methods', 2, function(){
+		this.store.setItem(69, 'item1');
+		equals(this.store.getKey(69), 'item1', 'The key 69 in hdStore should be "item1"');
+		
+		var testKey = this.store.getKey(75);
+		this.store.setKey(75, 'testKey'); //change key 75 to testKey
+		same(this.store.getKey('testKey'), testKey);
+	});
 /* Test#4 */
-test('getCount method', 5, function(){
+test('getCount method', 6, function(){
 	var store = new hdStore();
 	
 	store.add('key1', 'item1');
 	equals(store.getCount(), 1, 'There should only be 1 item in hdStore');
 	store.setKey('key1', 'key2');
-	equals(store.getCount(), 1, 'There should still only 1 item in hdStore');
+	equals(store.getCount(), 1, 'There should still only be 1 item in hdStore');
 	store.remove('key2');
 	equals(store.getCount(), 0, 'There should be 0 items in hdStore');
 	store.add('blah1', 321);
@@ -50,4 +58,5 @@ test('getCount method', 5, function(){
 	equals(store.getCount(), 2, 'Added 2 items')
 	store.removeAll();
 	equals(store.getCount(), 0, 'hdStore.removeAll');
+	equals(this.store.getCount(), 100, 'There should be 100 items in hdStore');
 });
