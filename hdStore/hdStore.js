@@ -33,7 +33,7 @@ function hdStore(id){
 				if(_events[n].type == eventtype){
 					for(var storageMethod in hdStore.Priorities){
 						if(hdStore.Priorities[storageMethod].canBeUsed && _events[n].id == storageMethod){
-							return _events[n].handler.call(that);
+							return _events[n].handler.call(that, _dict);
 						}
 					}
 				}
@@ -120,9 +120,9 @@ function hdStore(id){
 		return filteredDict;
 	};
 	this.toArray = function(){
-		var a = new Array(this.getCount()+1);
-		for (var key in this._dict){
-			a[key] = this._dict[key];
+		var a = new Array(this.getCount());
+		for (var key in _dict){
+			a[key] = _dict[key];
 		}
 		return a;
 	};
