@@ -13,5 +13,6 @@ Version history
 * hdStore 0.7
   + finalized API (removed getter/setter functions for the time being)
   + removed debuggin TOKENS
+  + _dict is now accessible to handler functions in plug-ins
 * hdStore 0.6
   + hdStore.count is now a getter function
