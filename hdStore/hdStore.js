@@ -51,10 +51,11 @@ function hdStore(id){
 		_dict[newkey] = _dict[oldkey];
 		this.remove(oldkey);
 	};
-	
+	//TODO: getKey is the same as getItem?
 	this.getKey = function(key){
 		return _dict[key];
 	};
+	//TODO: getItem is the same as getKey?
 	this.getItem = function(key){
 		return _dict[key];
 	};
