@@ -121,9 +121,14 @@ function hdStore(id){
 		return filteredDict;
 	};
 	this.toArray = function(){
-		var a = new Array(this.getCount());
+		this.toArray = function(){
+		var a = [];//new Array(this.getCount());
 		for (var key in _dict){
-			a.push(_dict[key]);
+			if(_dict[key] != "undefined"){
+				a.push(_dict[key]);
+			} else {
+				console.warn(key + ":  is" + _dict[key]);
+			}
 		}
 		return a;
 	};
