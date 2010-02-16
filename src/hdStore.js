@@ -123,7 +123,7 @@ function hdStore(id){
 	this.toArray = function(){
 		var a = new Array(this.getCount());
 		for (var key in _dict){
-			a[key] = _dict[key];
+			a.push(_dict[key]);
 		}
 		return a;
 	};
