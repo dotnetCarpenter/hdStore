@@ -69,7 +69,7 @@ function hdStore(id){
 	/* methods */
 	this.add = function(key, value){
 		if (this.exists(key)) {
-			throw new Error('Key ' + key + ' already exists in hdStore');
+			throw new Error('Key ' + key + ' already exists in instance ' + this.id + ' of hdStore');
 		} else {
 			_dict[key] = value;
 		}
