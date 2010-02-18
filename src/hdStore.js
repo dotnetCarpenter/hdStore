@@ -122,15 +122,17 @@ function hdStore(id){
 	};
 	this.toArray = function(){
 		this.toArray = function(){
-		var a = [];//new Array(this.getCount());
-		for (var key in _dict){
-			if(_dict[key] != "undefined"){
-				a.push(_dict[key]);
-			} else {
-				console.warn(key + ":  is" + _dict[key]);
+			var a = [];
+			for (var key in _dict) {
+				if (_dict[key] != "undefined") {
+					a.push(_dict[key]);
+				}
+				else {
+					console.warn(key + ":  is" + _dict[key]);
+				}
 			}
+			return a;
 		}
-		return a;
 	};
 	this.toString = function(){
 		return this.id + " instance of hdStore";
@@ -148,6 +150,7 @@ function hdStore(id){
 		return _fireEvent('load');
 	};
 }
+
 /* getter/setter */
 /* TODO: refactor to seperate js file (which can be excluded from IE)*/
 /*if (!hdStore.__defineGetter) {
