@@ -9,7 +9,7 @@
  * @version 0.7
  */
 function hdStore(id){
-	
+	/* don't know if we should have this. I would prefer if we had a build script when you download hdStore */
 	try {
 		JSON.parse('{ }');
 	} catch (err) {
