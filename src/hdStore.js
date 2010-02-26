@@ -1,5 +1,5 @@
 /**
- * HdStore
+ * hdStore
  * Base API modeled after http://www.w3schools.com/asp/asp_ref_dictionary.asp
  * Properties: id (count, item, key is not implemented as properties but as fields)
  * Fields: getCount, getItem, setItem, getKey, setKey
@@ -43,26 +43,50 @@ function hdStore(id){
 	/* properties */
 	this.id = id || 'x-hdStore';
 	/* fields */
+	/**
+	 * Returns the number of key/item pairs in a hdStore object
+	 * @method hdStore.getCount
+	 */
 	this.getCount = function(){
 		// using __count__ to speed up getCount in FF
 		return _dict.__count__ || this.items().length;
 	};
+	/**
+	 * Sets a new key value for an existing key value in a hdStore object
+	 * @method hdStore.setKey
+	 * @param {String|Number} oldkey
+	 * @param {String|Number} newkey
+	 */
 	this.setKey = function(oldkey, newkey){
 		_dict[newkey] = _dict[oldkey];
 		this.remove(oldkey);
 	};
-
+	/**
+	 * Returns the value of an item in a hdStore object
+	 * @method hdStore.getItem
+	 * @param {String|Number} key
+	 */
 	this.getItem = function(key){
 		return _dict[key];
 	};
+	/**
+	 * Sets the value of an item in a hdStore object
+	 * @method hdStore.setItem
+	 * @param {String|Number} key
+	 * @param {Object} item
+	 */
 	this.setItem = function(key, item){
 		if(item){
 			return _dict[key] = item;
 		}
 		throw new Error('No item provided');
 	};
-	
-	/* methods */
+	/**
+	 * Adds a new key/item pair to a hdStore object
+	 * @method hdStore.add
+	 * @param {String|Number} key
+	 * @param {Object} value
+	 */
 	this.add = function(key, value){
 		if (this.exists(key)) {
 			throw new Error('Key ' + key + ' already exists in instance ' + this.id + ' of hdStore');
@@ -70,10 +94,21 @@ function hdStore(id){
 			_dict[key] = value;
 		}
 	};
+	/**
+	 * Returns a Boolean value that indicates whether a specified key exists in the hdStore object
+	 * @method hdStore.exists
+	 * @param {String|Number} key
+	 * @return {Boolean}
+	 */
 	this.exists = function(key){
 		// old: return _dict[key] ? true : false;
 		return key in _dict;
 	};
+	/**
+	 * Returns an array of all the items in a hdStore object
+	 * @method hdStore.items
+	 * @return {Array}
+	 */
 	this.items = function(){
 		// should we implement hasOwnProperty check?
 		var items = [];
@@ -87,6 +122,11 @@ function hdStore(id){
 		}
 		return items;
 	};
+	/**
+	 * Returns an array of all the keys in a hdStore object
+	 * @method hdStore.keys
+	 * @return {Array}
+	 */
 	this.keys = function(){
 		var keys = [];
 		for (var key in _dict){
@@ -94,23 +134,33 @@ function hdStore(id){
 		}
 		return keys;
 	};
+	/**
+	 * Removes one specified key/item pair from the hdStore object
+	 * @method hdStore.remove
+	 * @param {Object} key
+	 */
 	this.remove = function(key){
 		with (hdStore) {
 			delete _dict[key];
 		}
-//			eval ("delete _dict." + key + ";");
 	};
+	/**
+	 * Removes all the key/item pairs in the hdStore object
+	 * @method hdStore.removeAll
+	 */
 	this.removeAll = function(){
 		_dict = {};
 	};
 	/**
-	 * @return true if save is successful
+	 * @method hdStore.save
+	 * @return {Boolean} true if save is successful
 	 */
 	this.save = function(){		
 		return _fireEvent('save');
 	};
 	/**
-	 * @return true if load is successful
+	 * @method hdStore.load
+	 * @return {Boolean} true if load is successful
 	 */
 	this.load = function(){		
 		return _fireEvent('load');
@@ -137,6 +187,7 @@ hdStore.prototype.toString = function(){
  * Filter by a function. Returns a <i>new</i> collection that has been filtered.
  * The passed function will be called with each object in the collection.
  * If the function returns true, the value is included otherwise it is filtered.
+ * @method hdStore.filter
  * @param {Function} fn The function to be called, it will receive the args o (the object), k (the key)
  * @param {Object} scope (optional) The scope of the function (defaults to this)
  * @return {hdStore} The new filtered collection
@@ -154,6 +205,7 @@ hdStore.prototype.filter = function(fn, scope){
 hdStore.prototype.events = [];
 /**
  * Add handler to the load/save method
+ * @method hdStore.addHandler
  * @param {Object} event { handler: func, type: 'save'|'load', scope:[scope] }
  * scope defines what this refers to. If omitted the scope is window
  */
