@@ -41,7 +41,7 @@ test('getItem and setItem methods', 3, function(){
 		same(this.store.getItem('testKey'), testKey);
 	});
 /* Test#4 */
-test('getCount method', 6, function(){
+test('getCount method', 7, function(){
 	var store = new hdStore();
 	
 	store.add('key1', 'item1');
@@ -53,7 +53,39 @@ test('getCount method', 6, function(){
 	store.add('blah1', 321);
 	store.add('blah2', 'dsfds');
 	equals(store.getCount(), 2, 'Added 2 items')
+	store.add(321, 999);
+	equals(store.getCount(), 3, 'Added 1 item with key: 321')
 	store.removeAll();
 	equals(store.getCount(), 0, 'hdStore.removeAll');
 	equals(this.store.getCount(), 100, 'There should be 100 items in hdStore');
+});
+/* Test#5 */
+test('hdStore.add method', 3, function(){
+	// first assertion
+	equals(this.store.getCount(), 100, 'Counted with hdStore.getCount()');
+	// second assertion
+	equals(this.store.items().length, 100, 'Counted with hdStore.items()');
+	
+	//TODO: the following closure creates an error in Opera 10.x - fixed in 10.10
+	n = 100;
+	try {
+		while (n > 0) {
+			n--;
+			this.store.add(n, {
+				name: 'item' + n,
+				value: Math.random()
+			});
+		};
+	} catch(e) {
+		ok(e.message == "Key 99 already exists in instance x-hdStore of hdStore", "Key 99 already exists in instance x-hdStore of hdStore");
+	}
+});
+/* Test#6 */
+test('hdStore.exist method', 4, function(){
+	// testing edge cases and aproc. middle case
+	ok(this.store.exists(0), 'exists 0');
+	ok(this.store.exists(99), 'exists 99');
+	ok(this.store.exists(54), 'exists 54');
+	// should be false
+	ok(!(this.store.exists(532)), "key 532 shouldn't be in hdStore");
 });
