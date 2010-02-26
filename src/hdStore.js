@@ -6,7 +6,7 @@
  * Methods: add, exists, items, keys, remove, removeAll, filter, save, load, addHandler, toString
  * 
  * @author Jon Ege Ronnenberg (Ronnenberg) & Halfdan
- * @version 0.7
+ * @version 0.8
  */
 function hdStore(id){
 	/* don't know if we should have this. I would prefer if we had a build script when you download hdStore */

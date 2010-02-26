@@ -10,6 +10,8 @@ Chrome 2.0 does something fucked up with arrays, like auto-sort... Thus failing 
 Opera 10 (but not from Opera 10.10) has changed behavior for try..catch statements from Opera 9, thus failing test #5.3
 
 Version history
+* hdStore 0.8
+  + removed toArray method, use items instead!
 * hdStore 0.7
   + finalized API (removed getter/setter functions for the time being)
   + removed debuggin TOKENS
