@@ -96,6 +96,16 @@ test('hdStore.items method', 3, function(){
 	equals(
 		this.store.items()[5].name,
 		'item94',
-		'store.toArray()[5].name should have value.name = item94'
+		'store.items()[5].name should have value.name = item94'
+	);
+});
+/* Test#8 */
+test('hdStore.keys method', 3, function(){
+	equals(this.store.keys().length, 100, 'store.keys().length should be 100');
+	equals(typeof this.store.keys(), 'object', 'store.keys() typeof should be object. See table @ http://javascript.crockford.com/remedial.html');
+	equals(
+		this.store.keys()[5],
+		'94',
+		'store.keys()[5] should be key = 94'
 	);
 });
