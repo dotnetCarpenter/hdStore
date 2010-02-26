@@ -104,27 +104,6 @@ function hdStore(id){
 		_dict = {};
 	};
 	/**
-     * Filter by a function. Returns a <i>new</i> collection that has been filtered.
-     * The passed function will be called with each object in the collection.
-     * If the function returns true, the value is included otherwise it is filtered.
-     * @param {Function} fn The function to be called, it will receive the args o (the object), k (the key)
-     * @param {Object} scope (optional) The scope of the function (defaults to this)
-     * @return {hdStore} The new filtered collection
-     */
-	this.filter = function(fn, scope){
-		var filteredDict = new hdStore(this.id);
-		var k = this.keys(), it = this.items();
-		for(var i = 0; i < this.getCount(); i++){
-			if(fn.call(scope||this, it[i], k[i])){
-				filteredDict.add(k[i], it[i]);
-			}
-		}
-		return filteredDict;
-	};
-	this.toString = function(){
-		return this.id + " instance of hdStore";
-	};
-	/**
 	 * @return true if save is successful
 	 */
 	this.save = function(){		
@@ -151,6 +130,27 @@ function hdStore(id){
 	}
 }*/
 /* static properties/methods */
+hdStore.prototype.toString = function(){
+	return this.id + " instance of hdStore";
+};
+/**
+ * Filter by a function. Returns a <i>new</i> collection that has been filtered.
+ * The passed function will be called with each object in the collection.
+ * If the function returns true, the value is included otherwise it is filtered.
+ * @param {Function} fn The function to be called, it will receive the args o (the object), k (the key)
+ * @param {Object} scope (optional) The scope of the function (defaults to this)
+ * @return {hdStore} The new filtered collection
+ */
+hdStore.prototype.filter = function(fn, scope){
+	var filteredDict = new hdStore(this.id);
+	var k = this.keys(), it = this.items();
+	for(var i = 0; i < this.getCount(); i++){
+		if(fn.call(scope||this, it[i], k[i])){
+			filteredDict.add(k[i], it[i]);
+		}
+	}
+	return filteredDict;
+};
 hdStore.prototype.events = [];
 /**
  * Add handler to the load/save method
