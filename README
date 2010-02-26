@@ -19,9 +19,9 @@ Version history
   
   Unit Test
   We use qunit for unit tests.
-  core.js test suite has been tested and succesful in the following browsers:
+  core.js test suite has been tested and succesful in the following browsers (versions seperated by comma):
   * Opera				(Presto/2.2.15 Version/10.10)
   * Chrome				(AppleWebKit/532.5 Version/4.0.249.89)
   * Safari				(AppleWebKit/531.21.8 Version/4.0.4)
-  * Firefox 			(Gecko/20100115 Version/3.6)
+  * Firefox 			(Gecko/20100115 Version/3.6, Gecko/20100226 Minefield/3.7a2pre)
   * Internet Explorer 	(Version/5.5, Version/6.0, Version/7.0, Trident/4.0 Version 8.0) 
