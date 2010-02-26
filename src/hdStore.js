@@ -3,7 +3,7 @@
  * Base API modeled after http://www.w3schools.com/asp/asp_ref_dictionary.asp
  * Properties: id (count, item, key is not implemented as properties but as fields)
  * Fields: getCount, getItem, setItem, getKey, setKey
- * Methods: add, exists, items, keys, remove, removeAll, toArray, filter, save, load, addHandler, toString
+ * Methods: add, exists, items, keys, remove, removeAll, filter, save, load, addHandler, toString
  * 
  * @author Jon Ege Ronnenberg (Ronnenberg) & Halfdan
  * @version 0.7
