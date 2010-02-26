@@ -29,7 +29,7 @@ hdStore.userData = function(){
 			try {
 				var docStore = document.documentElement;
 				docStore.addBehavior('#default#userdata');
-				docStore.setAttribute('x-hdStore-data', JSON.stringify(this.toArray()));
+				docStore.setAttribute('x-hdStore-data', JSON.stringify(this.items()));
 				docStore.save(this.id);
 				return true;
 			}

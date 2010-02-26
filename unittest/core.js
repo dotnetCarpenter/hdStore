@@ -83,9 +83,19 @@ test('hdStore.add method', 3, function(){
 /* Test#6 */
 test('hdStore.exist method', 4, function(){
 	// testing edge cases and aproc. middle case
-	ok(this.store.exists(0), 'exists 0');
-	ok(this.store.exists(99), 'exists 99');
-	ok(this.store.exists(54), 'exists 54');
+	ok(this.store.exists(0), 'key 0 exists');
+	ok(this.store.exists(99), 'key 99 exists');
+	ok(this.store.exists(54), 'key 54 exists');
 	// should be false
 	ok(!(this.store.exists(532)), "key 532 shouldn't be in hdStore");
+});
+/* Test#7 */
+test('hdStore.items method', 3, function(){
+	equals(this.store.getCount(), 100, 'store.getCount() should be 100');
+	equals(typeof this.store.items(), 'object', 'store.items() typeof should be object. See table @ http://javascript.crockford.com/remedial.html');
+	equals(
+		this.store.items()[5].name,
+		'item94',
+		'store.toArray()[5].name should have value.name = item94'
+	);
 });

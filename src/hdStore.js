@@ -21,7 +21,7 @@ function hdStore(id){
 	//private vars/functions/objects goes here
 	var _dict = {},
 		_events = hdStore.prototype.events,
-		that = this,
+		self = this,
 		/**
 		 * Private method to fire events when the load or save methods are used.
 		 * *this* is scoped to your instance of hdStore.
@@ -33,7 +33,7 @@ function hdStore(id){
 				if(_events[n].type == eventtype){
 					for(var storageMethod in hdStore.Priorities){
 						if(hdStore.Priorities[storageMethod].canBeUsed && _events[n].id == storageMethod){
-							return _events[n].handler.call(that, _dict);
+							return _events[n].handler.call(self, _dict);
 						}
 					}
 				}
@@ -51,7 +51,7 @@ function hdStore(id){
 		_dict[newkey] = _dict[oldkey];
 		this.remove(oldkey);
 	};
-	//TODO: getItem is the same as getKey?
+
 	this.getItem = function(key){
 		return _dict[key];
 	};
@@ -78,7 +78,12 @@ function hdStore(id){
 		// should we implement hasOwnProperty check?
 		var items = [];
 		for (var key in _dict){
-			items.push(_dict[key]);
+			if (_dict[key] != "undefined") {
+				items.push(_dict[key]);
+			} else {
+				//TODO: create output function with console feature detection
+				console.warn(key + ": is " + _dict[key]);
+			}
 		}
 		return items;
 	};
@@ -104,7 +109,7 @@ function hdStore(id){
      * If the function returns true, the value is included otherwise it is filtered.
      * @param {Function} fn The function to be called, it will receive the args o (the object), k (the key)
      * @param {Object} scope (optional) The scope of the function (defaults to this)
-     * @return {Dictionary} The new filtered collection
+     * @return {hdStore} The new filtered collection
      */
 	this.filter = function(fn, scope){
 		var filteredDict = new hdStore(this.id);
@@ -115,20 +120,6 @@ function hdStore(id){
 			}
 		}
 		return filteredDict;
-	};
-	this.toArray = function(){
-		this.toArray = function(){
-			var a = [];
-			for (var key in _dict) {
-				if (_dict[key] != "undefined") {
-					a.push(_dict[key]);
-				}
-				else {
-					console.warn(key + ":  is" + _dict[key]);
-				}
-			}
-			return a;
-		}
 	};
 	this.toString = function(){
 		return this.id + " instance of hdStore";
@@ -148,7 +139,9 @@ function hdStore(id){
 }
 
 /* getter/setter */
-/* TODO: refactor to seperate js file (which can be excluded from IE)*/
+/* TODO: refactor to seperate js file (which can be excluded from IE)
+ * http://msdn.microsoft.com/en-us/library/dd229916%28VS.85%29.aspx
+ */
 /*if (!hdStore.__defineGetter) {
 	alert('hep');
 	hdStore.prototype = {
