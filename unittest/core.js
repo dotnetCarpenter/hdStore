@@ -109,3 +109,40 @@ test('hdStore.keys method', 3, function(){
 		'store.keys()[5] should be key = 94'
 	);
 });
+/* Test#9 */
+test('hdStore.remove method', 2, function(){
+	ok(this.store.exists(69), 'item with key 69 should exist');
+	this.store.remove(69); // remove item with key 69
+	ok(!this.store.exists(69), 'item with key 69 should NOT exist');
+});
+/* Test#10 */
+test('hdStore.removeAll method', 1, function(){
+	this.store.removeAll();
+	equals(this.store.getCount(), 0, 'hdStore should contain 0 items')
+});
+/* Test#11 */
+test('hdStore.filter method', 4, function(){
+	// miniStore will contain items between 40 and 90
+	var miniStore = this.store.filter(function(o, k){
+		return k > 40 && k <= 90;
+	});
+	equals(this.store.getCount(), 100, 'hdStore should be uneffected be miniStore');
+	equals(miniStore.getCount(), 50, 'miniStore should contain 50 items')
+	equals(
+		miniStore.filter(function(o, k){
+			return o.name === 'item41';
+		}).getCount(),
+		1
+	);
+	// scope test
+	var scopeObject = function(){
+		return {
+			value: 20
+		}
+	}();		
+	
+	var scopeFilter = this.store.filter(function(o, k){
+		return k < this.value;
+	}, scopeObject);
+	equals(scopeFilter.getCount(), scopeObject.value);
+});
