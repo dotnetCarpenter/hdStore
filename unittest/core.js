@@ -35,13 +35,10 @@ test('getItem and setItem methods', 3, function(){
 	equals(this.store.getItem('52').name, 'item52', 'Retrieve item with name item52');
 });
 /* Test#3 */
-	test('setKey and getKey methods', 2, function(){
-		this.store.setItem(69, 'item1');
-		equals(this.store.getKey(69), 'item1', 'The key 69 in hdStore should be "item1"');
-		
-		var testKey = this.store.getKey(75);
+	test('setKey and getKey methods', 1, function(){		
+		var testKey = this.store.getItem(75);
 		this.store.setKey(75, 'testKey'); //change key 75 to testKey
-		same(this.store.getKey('testKey'), testKey);
+		same(this.store.getItem('testKey'), testKey);
 	});
 /* Test#4 */
 test('getCount method', 6, function(){
