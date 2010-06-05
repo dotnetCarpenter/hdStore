@@ -134,6 +134,7 @@ test('hdStore.filter method', 4, function(){
 		}).getCount(),
 		1
 	);
+
 	// scope test
 	var scopeObject = function(){
 		return {
