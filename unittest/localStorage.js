@@ -20,5 +20,5 @@ test('save', 1, function(){
 });
 test('load', 2, function(){
 	ok(this.store.load(), "The data in " + this.store.id + " is loaded");
-	same(this.myObject, this.store.getItem("myObject"));
+	same( this.store.getItem("myObject"), this.myObject);
 });
