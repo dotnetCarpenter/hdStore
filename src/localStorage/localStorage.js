@@ -10,7 +10,6 @@ hdStore.localStorage = function(){
 		try {
 			if (type == 'save') {
 				localStorage[store.id] = JSON.stringify(dict);
-				console.log(dict);
 			}
 			else {
 				dict = JSON.parse(localStorage[store.id]);
