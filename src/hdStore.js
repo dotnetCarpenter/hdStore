@@ -2,7 +2,7 @@
  * hdStore
  * Base API modeled after http://www.w3schools.com/asp/asp_ref_dictionary.asp
  * Properties: id (count, item, key is not implemented as properties but as fields)
- * Fields: getCount, getItem, setItem, getKey, setKey
+ * Fields: getCount, getItem, setItem, setKey
  * Methods: add, exists, items, keys, remove, removeAll, filter, save, load, addHandler, toString
  * 
  * @author Jon Ege Ronnenberg (Ronnenberg) & Halfdan
@@ -61,9 +61,6 @@ function hdStore(id){
 		if(!this.exists(oldkey)){ throw new Error(oldkey + ' does not exists'); }
 		_dict[newkey] = _dict[oldkey];
 		this.remove(oldkey);
-	};
-	this.getKey = function(value){
-		
 	};
 	/**
 	 * Returns the value of an item in a hdStore object
