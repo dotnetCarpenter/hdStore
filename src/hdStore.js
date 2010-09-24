@@ -20,8 +20,9 @@ function hdStore(id){
 	}
 	//private vars/functions/objects goes here
 	var _dict = {},
+	    _order = [],
 		_events = hdStore.prototype.events,
-		self = this,
+		_self = this,
 		/**
 		 * Private method to fire events when the load or save methods are used.
 		 * *this* is scoped to your instance of hdStore.
@@ -33,7 +34,7 @@ function hdStore(id){
 				if(_events[n].type == eventtype){
 					for(var storageMethod in hdStore.Priorities){
 						if(hdStore.Priorities[storageMethod].canBeUsed && _events[n].id == storageMethod){
-							return _events[n].handler.call(self, _dict);
+							return _events[n].handler.call(_self, _dict);
 						}
 					}
 				}
@@ -41,6 +42,9 @@ function hdStore(id){
 			return false;
 		};
 	/* properties */
+	/**
+	 * The current instance id
+	 */
 	this.id = id || 'x-hdStore';
 	/* fields */
 	/**
@@ -49,7 +53,7 @@ function hdStore(id){
 	 */
 	this.getCount = function(){
 		// using __count__ to speed up getCount in FF
-		return _dict.__count__ || this.items().length;
+		return _dict.__count__ || _order.length;
 	};
 	/**
 	 * Sets a new key value for an existing key value in a hdStore object
@@ -60,6 +64,12 @@ function hdStore(id){
 	this.setKey = function(oldkey, newkey){
 		if(!this.exists(oldkey)){ throw new Error(oldkey + ' does not exists'); }
 		_dict[newkey] = _dict[oldkey];
+		for(var i = 0; i < _order.length; i++){
+			if(_order[i] === oldkey){
+				_order[i] = newkey;
+				break;
+			}
+		}
 		this.remove(oldkey);
 	};
 	/**
@@ -93,6 +103,7 @@ function hdStore(id){
 			throw new Error('Key ' + key + ' already exists in instance ' + this.id + ' of hdStore');
 		} else {
 			_dict[key] = value;
+			_order.push(key);
 		}
 	};
 	/**
@@ -113,6 +124,10 @@ function hdStore(id){
 	this.items = function(){
 		// should we implement hasOwnProperty check?
 		var items = [];
+		for (var i = 0; i <_order.length; i++){
+			items.push(_dict[_order[i]]);			
+		}
+		/* old implementation
 		for (var key in _dict){
 			if (_dict[key] != "undefined") {
 				items.push(_dict[key]);
@@ -120,7 +135,7 @@ function hdStore(id){
 				//TODO: create output function with console feature detection
 				console.warn(key + ": is " + _dict[key]);
 			}
-		}
+		}*/
 		return items;
 	};
 	/**
@@ -129,20 +144,25 @@ function hdStore(id){
 	 * @return {Array}
 	 */
 	this.keys = function(){
-		var keys = [];
-		for (var key in _dict){
-			keys.push(key);
-		}
-		return keys;
+		return _order;
 	};
 	/**
 	 * Removes one specified key/item pair from the hdStore object
 	 * @method hdStore.remove
-	 * @param {Object} key
+	 * @param {String|Number} key
 	 */
 	this.remove = function(key){
+		// bugfix: corner case slice doesn't work if there is only 1 element in the array
+		//if(_order.length === 1){ this.removeAll(); }
 		with (hdStore) {
 			delete _dict[key];
+		}
+		for(var i = 0; i < _order.length; i++){
+			// remove the index order of the argument key
+			if(_order[i] === key){
+				_order.splice(i,1);
+				break;
+			}
 		}
 	};
 	/**
@@ -151,6 +171,7 @@ function hdStore(id){
 	 */
 	this.removeAll = function(){
 		_dict = {};
+		_order = [];
 	};
 	/**
 	 * @method hdStore.save
