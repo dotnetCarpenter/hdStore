@@ -58,8 +58,12 @@ function hdStore(id){
 	 * @param {String|Number} newkey
 	 */
 	this.setKey = function(oldkey, newkey){
+		if(!this.exists(oldkey)){ throw new Error(oldkey + ' does not exists'); }
 		_dict[newkey] = _dict[oldkey];
 		this.remove(oldkey);
+	};
+	this.getKey = function(value){
+		
 	};
 	/**
 	 * Returns the value of an item in a hdStore object
