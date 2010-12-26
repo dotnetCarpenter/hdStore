@@ -25,7 +25,7 @@ hdStore.userData = function(){
 		type: 'save',
 		handler: function(){
 			// check if this implementation is used
-			if(!hdStore.userData.canBeUsed){ return; }
+			if(!hdStore.userData){ return; }
 			try {
 				var docStore = document.documentElement;
 				docStore.addBehavior('#default#userdata');
