@@ -1,21 +1,16 @@
 /**
- * hdStore
- * Base API modeled after http://www.w3schools.com/asp/asp_ref_dictionary.asp
- * Properties: id (count, item, key is not implemented as properties but as fields)
- * Fields: getCount, getItem, setItem, setKey
+ * Properties: id (count, item, key is not implemented as properties but as fields)<br />
+ * Fields: getCount, getItem, setItem, setKey<br />
  * Methods: add, exists, items, keys, remove, removeAll, filter, save, load, addHandler, toString
- * 
  * @author Jon Ege Ronnenberg (Ronnenberg) & Halfdan
  * @version 0.8
+ * @constructor
  */
 function hdStore(id){
-	/* don't know if we should have this. I would prefer if we had a build script when you download hdStore */
-	try {
-		JSON.parse('{ }');
-	} catch (err) {
+	if(JSON && JSON.parse){
 		var script = document.createElement('script');
 		script.type = 'text/javascript';
-		script.src = 'dependencies/json2.js';
+		script.src = 'https://github.com/douglascrockford/JSON-js/raw/master/json2.js';
 		document.getElementsByTagName('head')[0].appendChild(script);
 	}
 	//private vars/functions/objects goes here
@@ -24,7 +19,7 @@ function hdStore(id){
 		_events = hdStore.prototype.events,
 		_self = this,
 		/**
-		 * Private method to fire events when the load or save methods are used.
+		 * Private method to fire events when the load or save methods are used.<br />
 		 * *this* is scoped to your instance of hdStore.
 		 * @private
 		 * @param {String} eventtype Should be either load for loading persistent data or save for saving to persisten storage
