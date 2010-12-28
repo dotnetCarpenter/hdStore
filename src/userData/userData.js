@@ -44,7 +44,7 @@ hdStore.userData = function(){
 		type: 'load',
 		handler: function(){
 			// check if this implementation is used
-			if(!hdStore.userData.canBeUsed){ return; }
+			if(!hdStore.userData){ return; }
 			try {
 				var docStore = document.documentElement;
 				docStore.load(this.id);
