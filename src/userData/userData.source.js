@@ -18,7 +18,7 @@
  * 2. http://svn.mirekrusin.com/pub/javascript/to_xml/trunk/to_xml.js <- require password now
  * Alternative object to json serializations
  * 1. http://blog.stchur.com/2007/04/06/serializing-objects-in-javascript/
- * 2. http://json.org/json2.js
+ * 2. https://github.com/douglascrockford/JSON-js/blob/master/json2.js <- implemented in this plug-in
  */
 hdStore.userData = function(){
 /*	_dir = function(a){
