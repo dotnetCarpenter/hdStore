@@ -7,14 +7,24 @@
  * @constructor
  */
 function hdStore(id){
+/*
 	try{
 		JSON.parse('{ }');
 	}catch(e){
 		var script = document.createElement('script');
 		script.type = 'text/javascript';
 		script.src = 'https://github.com/douglascrockford/JSON-js/raw/master/json2.js';
+        
+        if (script.onreadystatechange === null) {
+            script.onreadystatechange = function(){
+                if (this.readyState == 'complete') {
+                	hdStore.prototype.json2loaded = true;
+				}
+			}
+        }
 		document.getElementsByTagName('head')[0].appendChild(script);
 	}
+*/
 	//private vars/functions/objects goes here
 	var _dict = {},
 	    _order = [],

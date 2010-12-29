@@ -9,6 +9,7 @@ hdStore.localStorage = function(){
 		if(!hdStore.localStorage){ return; }
 		try {
 			if (type == 'save') {
+				alert(JSON.stringify(dict));
 				localStorage[store.id] = JSON.stringify(dict);
 			}
 			else {
@@ -26,7 +27,7 @@ hdStore.localStorage = function(){
 			}
 			return true;
 		} catch(e){
-			if(console && console.log){ console.log(e); }
+			if(window.console && console.log){ console.log(e); }
 			return false;
 		}
 	};
