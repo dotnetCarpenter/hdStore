@@ -37,5 +37,5 @@ hdStore.localStorage = function(){
 		},
 		id: 'localStorage'
 	});
-	return !!window.localStorage;
+	return !!window.localStorage && !!window.JSON;
 }();
