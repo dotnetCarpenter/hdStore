@@ -85,11 +85,11 @@ function hdStore(id){
 	 * Adds a new key/item pair to a hdStore object
 	 * @method hdStore.add
 	 * @param {String|Number} key
-	 * @param {Object} value
+	 * @param {Object} value Optional (will be undefined if not supplied)
 	 */
 	this.add = function(key, value){
 		if (this.exists(key)) {
-			throw new Error('Key ' + key + ' already exists in instance ' + this.id + ' of hdStore');
+			throw new Error('Key ' + key + ' already exists in instance ' + this.id + ' of hdStore. Perhaps you want to use .setItem instead?');
 		} else {
 			_dict[key] = value;
 			_order.push(key);
